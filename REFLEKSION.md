@@ -79,3 +79,9 @@ Hvis I har brugt AI til en væsentlig del af løsningen, så beskriv kort:
 - Hvad lærte I, og hvordan kontrollerede I løsningen?
 
 Hvis I ikke har brugt AI, kan I blot skrive det. I skal ikke indsætte en komplet chatlog.
+
+**Noter til Refleksion**
+
+- benspænd - hero img / banner 
+    - problemer med vidden, da hero lå i main som havde en max vidde på 1200px henover midten, kunne den "aldrig" komme udover de 1200. så løsningen blev at main har fået en vidde fra a til d i griddet, og der er pt reflektsioner om en section i main der så fungere fon en form for content container så resten af indhold altid vil følge de 1200px. 
+    - problemer med tekst og service cards der "klistrede" sig til billedet og ikke til hele hero sektionen, blev løst med fejlfinding med chatgpt. 

@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import InfoImg from "@assets/images/InfoImg.png";
+---
+
+<section class="info">
+  <div class="info-inner">
+    <!-- Billede med grøn dekorationsboks -->
+    <div class="info-image">
+      <div class="green-box"></div>
+
+      <Image
+        class="info-img"
+        src={InfoImg}
+        alt="Info"
+      />
+    </div>
+
+    <!-- Tekst -->
+    <div class="info-text">
+      <h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h2>
+
+      <h1>Et ad labore temporibus praesentium</h1>
+
+      <p>
+        quod dolores provident illo in porro expedita excepturi beatae nam,
+        minus eveniet ducimus nulla recusandae maxime saepe.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ullam
+        ducimus minus cum, repellendus, eligendi quas facilis, beatae sapiente
+        maiores ea distinctio quia cupiditate officia vero dolores.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, nisi
+        nesciunt! Eligendi exercitationem aliquid, rerum, repudiandae cupiditate
+        ex facilis iusto quas vero corrupti.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    /* Sectionen går i fuld bredde */
+    .info {
+      width: 100%;
+      margin-top: 10rem;
+    }
+
+    /* Indholdet holdes i 1200px */
+    .info-inner {
+      width: min(1200px, 100%);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* Plads til den grønne boks */
+    .info-image {
+      position: relative;
+      padding: 1.25rem;
+    }
+
+    .info-img {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+      border-radius: 25px;
+    }
+
+    /* Grøn boks bag billedet */
+    .green-box {
+      position: absolute;
+      width: 10rem;
+      height: 10rem;
+
+      top: -0.5rem;
+      left: -0.5rem;
+      background-color: var(--color-green-400);
+      z-index: 0;
+      border-radius: 25px;
+    }
+
+    .info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .info-text h1,
+    .info-text h2,
+    .info-text p {
+      margin: 0;
+    }
+
+    .info-text h2 {
+      font-size: 1rem;
+    }
+
+    .info-text h1 {
+      font-size: 1.8rem;
+    }
+
+    .info-text p {
+      line-height: 1.6;
+    }
+  }
+</style>
