@@ -1,24 +1,68 @@
 ---
+// Importerer dit overordnede CSS-stylesheet
 import "@styles/main.css";
+
+// Importerer Font-funktionen fra Astro,
+// så du kan hente og optimere skrifttyper
 import { Font } from "astro:assets";
+
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
     <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
-    <Font cssVariable="--font-cabin" preload />
-    <Font cssVariable="--font-lato" preload />
+    <!-- Indlæser skrifttypen Cabin og gemmer den som CSS-variablen --font-cabin -->
+    <Font
+      cssVariable="--font-cabin"
+      preload
+    />
+    <!-- Indlæser skrifttypen Lato og gemmer den som CSS-variablen --font-lato -->
+    <Font
+      cssVariable="--font-lato"
+      preload
+    />
+    <!-- Definerer rækkefølgen på dine CSS-layers -->
     <style is:inline>
       @layer reset, global, tokens, components, overrides;
     </style>
   </head>
   <body>
-    <slot />
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 
-<style></style>
+<style>
+  body {
+    display: grid;
+    grid-template-columns:
+      [a] 1fr
+      [b] minmax(0, 1200px)
+      [c] 1fr
+      [d];
+  }
+
+  main {
+    grid-column: b / c;
+  }
+</style>

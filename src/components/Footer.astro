@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.png";
+---
+
+<footer>
+    <div class="footer-content">
+        <a href="/">
+            <Image
+                src={logo}
+                alt="Logo"
+            />
+        </a>
+
+        <p>©2026 Consultalk. All rights reserved</p>
+        <p>Terms of Service | Privacy Policy</p>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: var(--color-blue-700);
+        grid-column: a / d;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .footer-content p {
+        color: var(--color-on-ui-primary);
+        font-family: var(--font-heading);
+    }
+
+    .footer-content a {
+        text-decoration: none;
+    }
+
+    .footer-content p:first-of-type {
+        justify-self: center;
+    }
+
+    .footer-content p:last-of-type {
+        justify-self: end;
+    }
+</style>
