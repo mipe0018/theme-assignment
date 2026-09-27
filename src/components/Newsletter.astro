@@ -1,0 +1,75 @@
+---
+
+---
+
+<section class="newsletter">
+    <div class="newsletter-inner">
+        <h2>STAY UPDATED</h2>
+
+        <h1>Subscribe Our <span>Newsletter</span></h1>
+
+        <p>Build stronger Customer Relationships with Consultalk</p>
+
+        <div class="newsletter-form">
+            <button>your mail address</button>
+            <button>Subscribe</button>
+        </div>
+    </div>
+</section>
+
+<style>
+    @layer components {
+        /* Blå baggrund i fuld bredde */
+        .newsletter {
+            grid-column: a / d;
+            width: 100%;
+            margin-top: 8rem;
+            min-height: 10rem;
+
+            background-color: var(--color-neutrals-900);
+        }
+
+        /* Indholdet holdes i 1200px */
+        .newsletter-inner {
+            width: min(1200px, 100%);
+            margin-inline: auto;
+
+            padding-block: 4rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .newsletter-inner h2,
+        .newsletter-inner h1,
+        .newsletter-inner p {
+            margin: 0;
+        }
+
+        .newsletter-inner h2 {
+            font-size: 0.9rem;
+            color: var(--color-accent);
+        }
+
+        .newsletter-inner h1 {
+            color: var(--color-on-ui-primary);
+        }
+
+        /* Det ord, der skal være gult */
+        .newsletter-inner h1 span {
+            color: var(--color-accent);
+        }
+
+        .newsletter-inner p {
+            color: var(--color-on-ui-primary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+    }
+</style>
