@@ -5,30 +5,137 @@ import CEOImage from "@assets/images/ceo.webp";
 ---
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>Empowering Your Business Growth</h1>
-    <p>
-      Discover tailored strategies and expert insights to take your business to
-      the next level. Let us help you navigate challenges and achieve
-      sustainable success.
-    </p>
-    <a href="#0">Book a Meeting</a>
-    <a href="#0">Learn More</a>
-  </div>
+  <!-- Billede uden for 1200px-container -->
   <Image
+    class="hero-ceo"
     src={CEOImage}
     alt="CEO"
   />
 
-  <Services />
+  <!-- Indhold i 1200px -->
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Empowering Your Business Growth</h1>
+
+      <p>
+        Discover tailored strategies and expert insights to take your business
+        to the next level. Let us help you navigate challenges and achieve
+        sustainable success.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#0">Book a Meeting</a>
+        <a href="#0">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Services hænger ud over hero -->
+    <div class="hero-service-list">
+      <Services />
+    </div>
+  </div>
 </section>
 
 <style>
-  /* Styles her */
   @layer components {
+    /* Blå baggrund i fuld bredde */
     .hero {
-      background-color: #f3f4f6;
-      padding: 2rem;
+      grid-column: a / d;
+      position: relative;
+      min-height: 28rem;
+      background-color: var(--color-blue-700);
+    }
+
+    /* Indhold begrænset til 1200px */
+    .hero-inner {
+      width: min(1200px, 100%);
+      height: 28rem;
+      margin-inline: auto;
+
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      z-index: 1;
+    }
+
+    /* Billede fra midten til højre kant */
+    .hero-ceo {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 50%;
+
+      width: 50%;
+      height: 100%;
+
+      object-fit: cover;
+      z-index: 0;
+
+      /* Fader ind i den blå baggrund */
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 25%,
+        black 100%
+      );
+    }
+
+    .hero-text {
+      grid-column: 1;
+      align-self: center;
+
+      max-width: 32rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      color: var(--color-on-ui-primary);
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text h1,
+    .hero-text p {
+      margin: 0;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-buttons a {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hero-buttons a:first-child {
+      background-color: var(--color-accent, #f5b83d);
+      color: var(--color-blue-900, #0e1526);
+    }
+
+    .hero-buttons a:last-child {
+      color: var(--color-on-ui-primary);
+      border: 1px solid var(--color-on-ui-primary);
+    }
+
+    /* Services hænger ud over hero */
+    .hero-service-list {
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: 0;
+
+      z-index: 2;
+      transform: translateY(50%);
     }
   }
 </style>

@@ -55,14 +55,21 @@ import Footer from "@components/Footer.astro";
 <style>
   body {
     display: grid;
+
     grid-template-columns:
       [a] 1fr
       [b] minmax(0, 1200px)
       [c] 1fr
       [d];
+
+    grid-template-rows: auto 1fr auto;
+
+    min-height: 100svh;
+
+    margin: 0;
   }
 
   main {
-    grid-column: b / c;
+    grid-column: a / d;
   }
 </style>
