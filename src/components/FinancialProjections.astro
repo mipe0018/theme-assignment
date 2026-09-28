@@ -1,0 +1,177 @@
+---
+//@ts-nocheck
+
+import FinancialCard from "@components/FinancialCard.astro";
+
+const financialData = await fetch(
+    "https://ftk-api.pages.dev/financial-projections",
+).then((res) => res.json());
+---
+
+<div class="financial-wrapper">
+    <div class="financial-header">
+        <div class="financial-text">
+            <p class="eyebrow">
+                {financialData.eyebrow}
+            </p>
+
+            <h1>
+                {financialData.title}
+            </h1>
+
+            <p>
+                {financialData.subtitle}
+            </p>
+        </div>
+
+        <div class="carousel-buttons">
+            <button
+                id="previous"
+                aria-label="Forrige"
+            >
+                ←
+            </button>
+
+            <button
+                id="next"
+                aria-label="Næste"
+            >
+                →
+            </button>
+        </div>
+    </div>
+
+    <div
+        class="financial-cards"
+        id="financial-cards"
+    >
+        {
+            financialData.values.map((financial) => (
+                <div class="financial-card-wrapper">
+                    <FinancialCard financial={financial} />
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    const cards = document.querySelector("#financial-cards");
+    const previous = document.querySelector("#previous");
+    const next = document.querySelector("#next");
+
+    function scrollNext() {
+        if (!cards) return;
+
+        const card = cards.querySelector(".financial-card-wrapper");
+
+        if (!card) return;
+
+        const cardWidth = card.getBoundingClientRect().width;
+        const gap = 16;
+
+        cards.scrollBy({
+            left: cardWidth + gap,
+            behavior: "smooth",
+        });
+    }
+
+    function scrollPrevious() {
+        if (!cards) return;
+
+        const card = cards.querySelector(".financial-card-wrapper");
+
+        if (!card) return;
+
+        const cardWidth = card.getBoundingClientRect().width;
+        const gap = 16;
+
+        cards.scrollBy({
+            left: -(cardWidth + gap),
+            behavior: "smooth",
+        });
+    }
+
+    next?.addEventListener("click", scrollNext);
+
+    previous?.addEventListener("click", scrollPrevious);
+</script>
+
+<style>
+    .financial-wrapper {
+        width: min(1200px, 100%);
+        margin: 10rem auto 0;
+    }
+
+    .financial-header {
+        display: flex;
+        justify-content: space-between;
+
+        /* Sørger for at knapperne flugter med bunden */
+        align-items: flex-end;
+
+        margin-bottom: 2rem;
+    }
+
+    .financial-text {
+        max-width: 650px;
+    }
+
+    .financial-text h1 {
+        margin: 0.5rem 0 1rem;
+    }
+
+    .financial-text p {
+        margin: 0;
+    }
+
+    .financial-text .eyebrow {
+        margin: 0;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .carousel-buttons button {
+        width: 3rem;
+        height: 3rem;
+
+        border: none;
+        border-radius: 50%;
+
+        background-color: var(--color-blue-700);
+        color: white;
+
+        font-size: 1.5rem;
+
+        cursor: pointer;
+    }
+
+    .carousel-buttons button:hover {
+        opacity: 0.8;
+    }
+
+    .financial-cards {
+        display: flex;
+        gap: 1rem;
+
+        overflow-x: auto;
+
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+
+        scrollbar-width: none;
+    }
+
+    .financial-cards::-webkit-scrollbar {
+        display: none;
+    }
+
+    .financial-card-wrapper {
+        flex: 0 0 calc((100% - 3rem) / 4);
+
+        scroll-snap-align: start;
+    }
+</style>
