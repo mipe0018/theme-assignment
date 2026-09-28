@@ -1,0 +1,247 @@
+---
+interface Stat {
+    label: string;
+    value: number;
+}
+
+interface ExperienceData {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    stats: Stat[];
+}
+
+// Henter teksten og statistikkerne fra API'et
+const experienceData: ExperienceData = await fetch(
+    "https://ftk-api.pages.dev/experience",
+).then((res) => res.json());
+---
+
+<section class="experience">
+    <div class="experience-text">
+        <p class="eyebrow">
+            {experienceData.eyebrow}
+        </p>
+
+        <h1>{experienceData.title}</h1>
+
+        <p>{experienceData.subtitle}</p>
+    </div>
+
+    <div
+        class="stat-list"
+        aria-label="Statistik"
+    >
+        {
+            experienceData.stats.map((stat) => (
+                <figure
+                    data-target={stat.value}
+                    data-value="0"
+                >
+                    <svg
+                        viewBox="0 0 100 100"
+                        aria-hidden="true"
+                    >
+                        <circle class="track" />
+                        <circle
+                            class="progress"
+                            pathLength="100"
+                        />
+                        <circle
+                            class="marker"
+                            r="4"
+                        />
+                    </svg>
+
+                    <div class="stat-number">0</div>
+
+                    <figcaption>{stat.label}</figcaption>
+                </figure>
+            ))
+        }
+    </div>
+</section>
+
+<script>
+    const statFigures = document.querySelectorAll(".stat-list figure");
+
+    // Starter animationen, når cirklen bliver synlig på skærmen
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                const figure = entry.target;
+                const target = Number(figure.getAttribute("data-target"));
+
+                const number = figure.querySelector(".stat-number");
+                let value = 0;
+
+                // Tæller procenten op fra 0 til værdien fra API'et
+                const interval = setInterval(() => {
+                    value++;
+
+                    // Opdaterer værdien, som CSS bruger til cirklen
+                    figure.setAttribute("data-value", value.toString());
+
+                    if (number) {
+                        number.textContent = value + "%";
+                    }
+
+                    if (value >= target) {
+                        clearInterval(interval);
+                    }
+                }, 20);
+
+                // Animationen kører kun én gang
+                observer.unobserve(figure);
+            });
+        },
+        {
+            // Animationen starter, når 40% er synligt
+            threshold: 0.4,
+        },
+    );
+
+    statFigures.forEach((figure) => {
+        observer.observe(figure);
+    });
+</script>
+
+<style>
+    /* --- Full-width sektion --- */
+
+    .experience {
+        /* Den gule baggrund går helt ud til kanten */
+        background-color: var(--color-surface-highlight);
+
+        /* Indholdet begrænses til maks. 1200px */
+        padding-block: 5rem;
+        padding-inline: max(2rem, calc((100% - 1200px) / 2));
+        margin-top: 8rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 5rem;
+        align-items: center;
+
+        /* Teksten bliver sort */
+        color: black;
+    }
+
+    /* --- Tekst --- */
+
+    .experience-text {
+        max-width: 500px;
+    }
+
+    .experience-text .eyebrow {
+        margin: 0;
+    }
+
+    .experience-text h1 {
+        margin: 0.5rem 0 1rem;
+    }
+
+    .experience-text p {
+        margin: 0;
+    }
+
+    /* --- Statistikker --- */
+
+    .stat-list {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+    }
+
+    figure {
+        flex: 1;
+        max-width: 180px;
+        margin: 0;
+
+        /* Gør figure til container, så cqw kan bruges */
+        container: stat / inline-size;
+
+        display: grid;
+        grid-template-areas:
+            "stack"
+            "caption";
+
+        place-items: center;
+
+        /* Henter data-value fra HTML */
+        --value-number: attr(data-value type(<number>));
+    }
+
+    /* --- Cirkler --- */
+
+    svg {
+        grid-area: stack;
+        width: 100%;
+        aspect-ratio: 1;
+
+        /* Starter cirklen øverst */
+        transform: rotate(-90deg);
+    }
+
+    .track,
+    .progress {
+        cx: 50;
+        cy: 50;
+        r: 46;
+        fill: none;
+        stroke-width: 4;
+    }
+
+    /* Nederste/bagvedliggende cirkel */
+    .track {
+        stroke: #bdbdbd;
+    }
+
+    /* Den aktive procent-bar */
+    .progress {
+        stroke: white;
+        stroke-linecap: round;
+
+        /* Bestemmer hvor meget af cirklen der vises */
+        stroke-dasharray: var(--value-number) 100;
+    }
+
+    /* Den lille cirkel for enden af baren */
+    .marker {
+        fill: black;
+        stroke: white;
+        stroke-width: 2;
+
+        /* Bestemmer punktets placering på cirklen */
+        offset-path: circle(46px at 50px 50px);
+        offset-distance: calc(var(--value-number) * 1%);
+    }
+
+    /* --- Tal og tekst --- */
+
+    .stat-number {
+        grid-area: stack;
+        font-size: 30cqw;
+        font-weight: 700;
+        color: black;
+    }
+
+    figcaption {
+        grid-area: caption;
+        margin-block-start: 0.75rem;
+        color: black;
+    }
+
+    /* --- Mobil --- */
+
+    @media (max-width: 800px) {
+        .experience {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+
+            /* Mindre afstand til kanten på mobil */
+            padding-inline: 1.5rem;
+        }
+    }
+</style>
