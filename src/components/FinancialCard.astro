@@ -1,19 +1,9 @@
 ---
-const iconFiles = import.meta.glob("../icons/*.svg", {
-    eager: true,
-    query: "?url",
-    import: "default",
-});
-
 interface Props {
     financial: {
         icon: string;
         title: string;
         description: string;
-        link: {
-            text: string;
-            url: string;
-        };
     };
 }
 
@@ -52,7 +42,7 @@ const icon = iconFiles[`../icons/${financial.icon}.svg`];
 
 <style>
     .financial-card {
-        /* Afstand mellem ikon, overskrift og tekst */
+        /* Afstand mellem indholdet */
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -68,7 +58,7 @@ const icon = iconFiles[`../icons/${financial.icon}.svg`];
     }
 
     .financial-icon img {
-        /* Bestemmer størrelsen på ikonet */
+        /* Størrelse på ikonet */
         width: 40px;
         height: 40px;
     }
