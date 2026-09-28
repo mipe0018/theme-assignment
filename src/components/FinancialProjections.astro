@@ -1,5 +1,5 @@
 ---
-//@ts-nocheck
+// @ts-nocheck
 
 import FinancialCard from "@components/FinancialCard.astro";
 
@@ -15,13 +15,9 @@ const financialData = await fetch(
                 {financialData.eyebrow}
             </p>
 
-            <h1>
-                {financialData.title}
-            </h1>
+            <h1>{financialData.title}</h1>
 
-            <p>
-                {financialData.subtitle}
-            </p>
+            <p>{financialData.subtitle}</p>
         </div>
 
         <div class="carousel-buttons">
@@ -56,58 +52,87 @@ const financialData = await fetch(
 </div>
 
 <script>
+    // Finder containeren med alle financial cards
     const cards = document.querySelector("#financial-cards");
+
+    // Finder knappen til at scrolle tilbage
     const previous = document.querySelector("#previous");
+
+    // Finder knappen til at scrolle frem
     const next = document.querySelector("#next");
 
+    // Funktion der scroller carousel'et frem
     function scrollNext() {
+        // Stopper funktionen, hvis cards-containeren ikke findes
         if (!cards) return;
 
+        // Finder det første card i carousel'et
         const card = cards.querySelector(".financial-card-wrapper");
 
+        // Stopper funktionen, hvis der ikke findes et card
         if (!card) return;
 
+        // Finder bredden på cardet
         const cardWidth = card.getBoundingClientRect().width;
+
+        // Afstanden mellem cards er 16px (1rem)
         const gap = 16;
 
+        // Scroller carousel'et én card-bredde + mellemrum frem
         cards.scrollBy({
             left: cardWidth + gap,
-            behavior: "smooth",
+            behavior: "smooth", // Gør scrollingen glidende
         });
     }
 
+    // Funktion der scroller carousel'et tilbage
     function scrollPrevious() {
+        // Stopper funktionen, hvis cards-containeren ikke findes
         if (!cards) return;
 
+        // Finder det første card i carousel'et
         const card = cards.querySelector(".financial-card-wrapper");
 
+        // Stopper funktionen, hvis der ikke findes et card
         if (!card) return;
 
+        // Finder bredden på cardet
         const cardWidth = card.getBoundingClientRect().width;
+
+        // Afstanden mellem cards er 16px (1rem)
         const gap = 16;
 
+        // Scroller carousel'et én card-bredde + mellemrum tilbage
         cards.scrollBy({
             left: -(cardWidth + gap),
-            behavior: "smooth",
+            behavior: "smooth", // Gør scrollingen glidende
         });
     }
 
+    // Når der klikkes på "Næste", køres scrollNext()
     next?.addEventListener("click", scrollNext);
 
+    // Når der klikkes på "Forrige", køres scrollPrevious()
     previous?.addEventListener("click", scrollPrevious);
 </script>
 
 <style>
+    /* --- Hele sektionen --- */
+
     .financial-wrapper {
+        /* Maksimal bredde på hele sektionen */
         width: min(1200px, 100%);
-        margin: 10rem auto 0;
+
+        margin: 8rem auto 0;
     }
+
+    /* --- Header --- */
 
     .financial-header {
         display: flex;
         justify-content: space-between;
 
-        /* Sørger for at knapperne flugter med bunden */
+        /* Knapperne flugter med bunden af teksten */
         align-items: flex-end;
 
         margin-bottom: 2rem;
@@ -115,6 +140,10 @@ const financialData = await fetch(
 
     .financial-text {
         max-width: 650px;
+    }
+
+    .financial-text .eyebrow {
+        margin: 0;
     }
 
     .financial-text h1 {
@@ -125,12 +154,12 @@ const financialData = await fetch(
         margin: 0;
     }
 
-    .financial-text .eyebrow {
-        margin: 0;
-    }
+    /* --- Carousel-knapper --- */
 
     .carousel-buttons {
         display: flex;
+
+        /* Afstand mellem knapperne */
         gap: 0.5rem;
     }
 
@@ -138,14 +167,19 @@ const financialData = await fetch(
         width: 3rem;
         height: 3rem;
 
+        /* Fjern standard border */
         border: none;
+
+        /* Gør knappen rund */
         border-radius: 50%;
 
+        /* Knapfarve – skift farven her */
         background-color: var(--color-blue-700);
-        color: white;
 
+        color: white;
         font-size: 1.5rem;
 
+        /* Giver hånd-cursor ved hover */
         cursor: pointer;
     }
 
@@ -153,25 +187,54 @@ const financialData = await fetch(
         opacity: 0.8;
     }
 
+    /* --- Cards / carousel --- */
+
     .financial-cards {
         display: flex;
+
+        /* Afstand mellem cards */
         gap: 1rem;
 
+        /* Gør det muligt at scrolle vandret */
         overflow-x: auto;
 
+        /* Glidende scrolling */
         scroll-behavior: smooth;
+
+        /* Hvert card stopper ved starten af scroll-positionen */
         scroll-snap-type: x mandatory;
 
+        /* Skjuler scrollbar */
         scrollbar-width: none;
     }
 
+    /* Skjuler scrollbar i Chrome/Edge */
     .financial-cards::-webkit-scrollbar {
         display: none;
     }
 
+    /* Bestemmer hvor mange cards der kan ses */
     .financial-card-wrapper {
+        /* 4 cards med 1rem mellem hvert card */
         flex: 0 0 calc((100% - 3rem) / 4);
 
+        /* Cardet snapper til venstre side */
         scroll-snap-align: start;
+    }
+
+    /* --- Mobil --- */
+
+    @media (max-width: 800px) {
+        .financial-header {
+            /* Header bliver lodret på mindre skærme */
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .financial-card-wrapper {
+            /* På mobil vises ét card ad gangen */
+            flex: 0 0 85%;
+        }
     }
 </style>
