@@ -8,17 +8,58 @@ interface Props {
 }
 
 const { financial } = Astro.props;
+
+// Finder SVG-ikonerne i src/icons
+const iconFiles = import.meta.glob("../icons/*.svg", {
+    eager: true,
+    query: "?url",
+    import: "default",
+});
+
+// Finder det ikon, som API'et sender navnet på
+const icon = iconFiles[`../icons/${financial.icon}.svg`];
 ---
 
 <article class="financial-card">
+    <!-- Viser ikonet fra API'et -->
+    <div class="financial-icon">
+        {
+            icon && (
+                <img
+                    src={icon}
+                    alt=""
+                />
+            )
+        }
+    </div>
+
+    <!-- Viser kortets titel fra API'et -->
     <h2>{financial.title}</h2>
+
+    <!-- Viser kortets beskrivelse fra API'et -->
     <p>{financial.description}</p>
 </article>
 
 <style>
     .financial-card {
+        /* Afstand mellem ikon, overskrift og tekst */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        /* Luft mellem indhold og kanten */
         padding: 2rem;
-        background-color: white;
-        border-radius: 1rem;
+
+        /* Grå baggrund */
+        background-color: #e5e5e5;
+
+        /* Runde hjørner */
+        border-radius: 25px;
+    }
+
+    .financial-icon img {
+        /* Bestemmer størrelsen på ikonet */
+        width: 40px;
+        height: 40px;
     }
 </style>
