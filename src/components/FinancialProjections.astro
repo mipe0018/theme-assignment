@@ -1,26 +1,39 @@
 ---
-// @ts-nocheck
+/* @ts-nocheck bruges til at undgå TypeScript-fejl */
 
+// Importerer FinancialCard-komponenten
 import FinancialCard from "@components/FinancialCard.astro";
 
+// Henter financial-data fra API'et
 const financialData = await fetch(
     "https://ftk-api.pages.dev/financial-projections",
 ).then((res) => res.json());
 ---
 
 <div class="financial-wrapper">
+
+    <!-- Header med tekst og carousel-knapper -->
     <div class="financial-header">
+
         <div class="financial-text">
+
+            <!-- Henter eyebrow fra API'et -->
             <p class="eyebrow">
                 {financialData.eyebrow}
             </p>
 
+            <!-- Henter titel fra API'et -->
             <h1>{financialData.title}</h1>
 
+            <!-- Henter undertitel fra API'et -->
             <p>{financialData.subtitle}</p>
+
         </div>
 
+        <!-- Knapper til at styre carousel -->
         <div class="carousel-buttons">
+
+            <!-- Knap til at scrolle tilbage -->
             <button
                 id="previous"
                 aria-label="Forrige"
@@ -28,31 +41,40 @@ const financialData = await fetch(
                 ←
             </button>
 
+            <!-- Knap til at scrolle frem -->
             <button
                 id="next"
                 aria-label="Næste"
             >
                 →
             </button>
+
         </div>
     </div>
 
+
+    <!-- Carousel med alle financial cards -->
     <div
         class="financial-cards"
         id="financial-cards"
     >
         {
-            financialData.values.map((financial) => (
+            financialData.values.map((financial: any) => (
                 <div class="financial-card-wrapper">
+
+                    <!-- Sender data fra API'et videre til FinancialCard -->
                     <FinancialCard financial={financial} />
+
                 </div>
             ))
         }
     </div>
+
 </div>
 
+
 <script>
-    // Finder containeren med alle financial cards
+    // Finder carousel-containeren
     const cards = document.querySelector("#financial-cards");
 
     // Finder knappen til at scrolle tilbage
@@ -61,62 +83,69 @@ const financialData = await fetch(
     // Finder knappen til at scrolle frem
     const next = document.querySelector("#next");
 
-    // Funktion der scroller carousel'et frem
+
+    // Scroller carousel'et frem
     function scrollNext() {
-        // Stopper funktionen, hvis cards-containeren ikke findes
+
+        // Stopper hvis carousel-containeren ikke findes
         if (!cards) return;
 
-        // Finder det første card i carousel'et
+        // Finder det første card
         const card = cards.querySelector(".financial-card-wrapper");
 
-        // Stopper funktionen, hvis der ikke findes et card
+        // Stopper hvis der ikke findes et card
         if (!card) return;
 
         // Finder bredden på cardet
         const cardWidth = card.getBoundingClientRect().width;
 
-        // Afstanden mellem cards er 16px (1rem)
+        // Afstanden mellem cards er 16px
         const gap = 16;
 
-        // Scroller carousel'et én card-bredde + mellemrum frem
+        // Scroller én card-bredde + gap frem
         cards.scrollBy({
             left: cardWidth + gap,
             behavior: "smooth", // Gør scrollingen glidende
         });
     }
 
-    // Funktion der scroller carousel'et tilbage
+
+    // Scroller carousel'et tilbage
     function scrollPrevious() {
-        // Stopper funktionen, hvis cards-containeren ikke findes
+
+        // Stopper hvis carousel-containeren ikke findes
         if (!cards) return;
 
-        // Finder det første card i carousel'et
+        // Finder det første card
         const card = cards.querySelector(".financial-card-wrapper");
 
-        // Stopper funktionen, hvis der ikke findes et card
+        // Stopper hvis der ikke findes et card
         if (!card) return;
 
         // Finder bredden på cardet
         const cardWidth = card.getBoundingClientRect().width;
 
-        // Afstanden mellem cards er 16px (1rem)
+        // Afstanden mellem cards er 16px
         const gap = 16;
 
-        // Scroller carousel'et én card-bredde + mellemrum tilbage
+        // Scroller én card-bredde + gap tilbage
         cards.scrollBy({
             left: -(cardWidth + gap),
             behavior: "smooth", // Gør scrollingen glidende
         });
     }
 
-    // Når der klikkes på "Næste", køres scrollNext()
+
+    // Kører scrollNext når der klikkes på næste-knappen
     next?.addEventListener("click", scrollNext);
 
-    // Når der klikkes på "Forrige", køres scrollPrevious()
+    // Kører scrollPrevious når der klikkes på forrige-knappen
     previous?.addEventListener("click", scrollPrevious);
 </script>
 
+
 <style>
+
     /* --- Hele sektionen --- */
 
     .financial-wrapper {
@@ -126,13 +155,14 @@ const financialData = await fetch(
         margin: 8rem auto 0;
     }
 
+
     /* --- Header --- */
 
     .financial-header {
         display: flex;
         justify-content: space-between;
 
-        /* Knapperne flugter med bunden af teksten */
+        /* Knapperne flugter med bunden */
         align-items: flex-end;
 
         margin-bottom: 2rem;
@@ -153,6 +183,7 @@ const financialData = await fetch(
     .financial-text p {
         margin: 0;
     }
+
 
     /* --- Carousel-knapper --- */
 
@@ -187,6 +218,7 @@ const financialData = await fetch(
         opacity: 0.8;
     }
 
+
     /* --- Cards / carousel --- */
 
     .financial-cards {
@@ -201,7 +233,7 @@ const financialData = await fetch(
         /* Glidende scrolling */
         scroll-behavior: smooth;
 
-        /* Hvert card stopper ved starten af scroll-positionen */
+        /* Hvert card stopper ved starten */
         scroll-snap-type: x mandatory;
 
         /* Skjuler scrollbar */
@@ -215,6 +247,7 @@ const financialData = await fetch(
 
     /* Bestemmer hvor mange cards der kan ses */
     .financial-card-wrapper {
+
         /* 4 cards med 1rem mellem hvert card */
         flex: 0 0 calc((100% - 3rem) / 4);
 
@@ -222,10 +255,13 @@ const financialData = await fetch(
         scroll-snap-align: start;
     }
 
+
     /* --- Mobil --- */
 
     @media (max-width: 800px) {
+
         .financial-header {
+
             /* Header bliver lodret på mindre skærme */
             flex-direction: column;
             align-items: flex-start;
@@ -233,8 +269,10 @@ const financialData = await fetch(
         }
 
         .financial-card-wrapper {
+
             /* På mobil vises ét card ad gangen */
             flex: 0 0 85%;
         }
     }
+
 </style>
