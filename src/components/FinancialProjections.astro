@@ -105,7 +105,7 @@ const financialData = await fetch(
         // Scroller én card-bredde + gap frem
         cards.scrollBy({
             left: cardWidth + gap,
-            behavior: "smooth",
+            behavior: "smooth", // Gør scrollingen glidende
         });
     }
 
@@ -131,7 +131,7 @@ const financialData = await fetch(
         // Scroller én card-bredde + gap tilbage
         cards.scrollBy({
             left: -(cardWidth + gap),
-            behavior: "smooth",
+            behavior: "smooth", // Gør scrollingen glidende
         });
     }
 

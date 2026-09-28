@@ -1,9 +1,19 @@
 ---
+const iconFiles = import.meta.glob("../icons/*.svg", {
+    eager: true,
+    query: "?url",
+    import: "default",
+});
+
 interface Props {
     financial: {
         icon: string;
         title: string;
         description: string;
+        link: {
+            text: string;
+            url: string;
+        };
     };
 }
 
