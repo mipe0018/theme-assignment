@@ -1,10 +1,373 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import Vision from "@components/Vision.astro";
+import Values from "@components/Values.astro";
+import TeamsCard from "@components/TeamsCard.astro";
+import Faq from "@components/FAQ.astro";
+
+const teamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
+  res.json(),
+);
+
+const selectedTeams = teamsData.slice(0, 2);
 ---
 
 <Layout>
-  <main>
-    <h1>About us - test test</h1>
-    <!-- Byg sidens sektioner her med udgangspunkt i Figma-designet. -->
-  </main>
+  <div class="about">
+    <div class="about-heading">
+      <h2>About</h2>
+
+      <h1>Igniting Innovation</h1>
+
+      <p>
+        Our strength lies in the collaboration between our talented teams and
+        esteemed clients. We cultivate a workplace that champions innovation,
+        promotes peak performance, and guarantees client satisfaction.
+      </p>
+    </div>
+  </div>
+
+  <Vision />
+
+  <div class="numbers-info">
+    <div class="numbers">
+      <h1>1128+</h1>
+      <h2>Successful Work</h2>
+    </div>
+
+    <div class="numbers">
+      <h1>908+</h1>
+      <h2>Team member</h2>
+    </div>
+
+    <div class="numbers">
+      <h1>258+</h1>
+      <h2>Happy Customers</h2>
+    </div>
+
+    <div class="numbers">
+      <h1>564+</h1>
+      <h2>Creative Idea</h2>
+    </div>
+  </div>
+
+  <Values variant="alternative" />
+
+  <!-- =========================
+       OUR TEAM
+  ========================== -->
+
+  <section class="about-team">
+    <div class="about-team-grid">
+      <!-- TEKST -->
+
+      <div class="about-team-content">
+        <span>OUR TEAM</span>
+
+        <h2>Meet the people behind our success</h2>
+
+        <p>
+          Our team is made up of creative and dedicated people who work together
+          to create meaningful digital solutions. We believe that great results
+          come from collaboration, curiosity and different perspectives.
+        </p>
+
+        <a
+          href="/team"
+          class="join-team-button"
+        >
+          Meet the Team
+        </a>
+      </div>
+
+      <!-- BILLEDER -->
+
+      <div class="about-team-images">
+        {
+          selectedTeams[0] && (
+            <TeamsCard
+              team={selectedTeams[0]}
+              variant="compact"
+            />
+          )
+        }
+
+        {
+          selectedTeams[1] && (
+            <TeamsCard
+              team={selectedTeams[1]}
+              variant="compact"
+            />
+          )
+        }
+      </div>
+
+      <!-- PERSONINFO -->
+
+      <div class="about-team-info">
+        {
+          selectedTeams[0] && (
+            <div class="team-info">
+              <h3>{selectedTeams[0].name}</h3>
+
+              <span>{selectedTeams[0].title}</span>
+
+              <p>{selectedTeams[0].description}</p>
+            </div>
+          )
+        }
+
+        {
+          selectedTeams[1] && (
+            <div class="team-info">
+              <h3>{selectedTeams[1].name}</h3>
+
+              <span>{selectedTeams[1].title}</span>
+
+              <p>{selectedTeams[1].description}</p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <Faq />
 </Layout>
+
+<style>
+  .about {
+    width: 100%;
+  }
+
+  .about-heading {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-heading h2 {
+    margin-bottom: 1rem;
+    color: var(--color-blue-700);
+  }
+
+  .about-heading h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-heading p {
+    line-height: 1.7;
+  }
+
+  .numbers-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    margin: 6rem 0;
+  }
+
+  .numbers {
+    text-align: center;
+  }
+
+  .numbers h1 {
+    margin: 0;
+    color: var(--color-blue-700);
+  }
+
+  .numbers h2 {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+
+  /* =========================
+   OUR TEAM
+========================= */
+
+  .about-team {
+    width: 100%;
+    margin: 7rem 0;
+  }
+
+  .about-team-grid {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      155px
+      minmax(0, 1fr);
+    column-gap: 5rem;
+    width: min(1100px, calc(100% - 4rem));
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  /* =========================
+   TEKST
+========================= */
+
+  .about-team-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .about-team-content span {
+    margin-bottom: 1rem;
+    color: var(--color-blue-700);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .about-team-content h2 {
+    max-width: 450px;
+    margin: 0 0 1.25rem;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: 1.05;
+  }
+
+  .about-team-content p {
+    max-width: 450px;
+    margin: 0 0 2rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* =========================
+   BUTTON
+========================= */
+
+  .join-team-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 0.9rem 1.5rem;
+    color: white;
+    background-color: var(--color-blue-700);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .join-team-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  /* =========================
+   BILLEDER
+========================= */
+
+  .about-team-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 155px;
+    justify-self: center;
+  }
+
+  /* =========================
+   PERSONINFO
+========================= */
+
+  .about-team-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
+  .team-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .team-info h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .team-info span {
+    margin-bottom: 0.6rem;
+    color: var(--color-blue-700);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .team-info p {
+    max-width: none;
+    margin: 0;
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* =========================
+   TABLET
+========================= */
+
+  @media (max-width: 900px) {
+    .about-team-grid {
+      grid-template-columns: minmax(0, 1fr) 155px minmax(0, 1fr);
+      column-gap: 2.5rem;
+      width: calc(100% - 4rem);
+    }
+  }
+
+  /* =========================
+   MOBIL
+========================= */
+
+  @media (max-width: 700px) {
+    .numbers-info {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .about-team {
+      margin: 5rem 0;
+    }
+
+    .about-team-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      width: calc(100% - 3rem);
+      margin: 0 auto;
+    }
+
+    .about-team-content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .about-team-content h2,
+    .about-team-content p {
+      max-width: 600px;
+    }
+
+    .about-team-images {
+      width: 155px;
+      margin: 0 auto;
+    }
+
+    .about-team-info {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .team-info {
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

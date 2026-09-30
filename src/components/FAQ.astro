@@ -1,0 +1,301 @@
+---
+/* =========================================
+   FAQ DATA
+   ========================================= */
+
+const faqs = [
+    {
+        question: "What services does Consultalk provide?",
+        answer: "We provide a range of digital and business solutions designed to help companies improve their performance, strengthen their digital presence and achieve sustainable growth.",
+    },
+    {
+        question: "How can I get started with Consultalk?",
+        answer: "Getting started is simple. Contact our team and tell us a little about your project, goals and challenges. We will then help you find the right solution.",
+    },
+    {
+        question: "How long does a typical project take?",
+        answer: "Project timelines depend on the size and complexity of the project. During the initial conversation, we will discuss your needs and provide an estimated timeline.",
+    },
+    {
+        question: "Can you help with an existing website or digital solution?",
+        answer: "Yes. We can work with existing solutions and help identify areas that can be improved, redesigned or developed further.",
+    },
+    {
+        question: "Do you work with businesses of all sizes?",
+        answer: "Yes. We work with businesses at different stages and adapt our approach according to their goals, needs and available resources.",
+    },
+    {
+        question: "How does the collaboration process work?",
+        answer: "We begin by understanding your business and objectives. From there, we develop a clear plan, work closely with you throughout the project and make adjustments based on feedback.",
+    },
+    {
+        question: "Can I get a custom solution for my business?",
+        answer: "Absolutely. Every business has different challenges, so our solutions can be adapted to your specific requirements and objectives.",
+    },
+    {
+        question: "How much does a project cost?",
+        answer: "The cost depends on the scope, requirements and complexity of the project. Contact us to discuss your needs and receive more information about pricing.",
+    },
+    {
+        question: "Do you offer support after a project is completed?",
+        answer: "Yes. We can continue supporting your digital solution after launch and help with improvements, maintenance and future development.",
+    },
+    {
+        question: "How can I contact your team?",
+        answer: "You can contact our team through the contact options available on our website. We will be happy to hear about your project and answer any questions you may have.",
+    },
+];
+---
+
+<section class="faq">
+    <div class="faq-container">
+        <!-- =========================================
+         FAQ HEADER
+         ========================================= -->
+
+        <div class="faq-header">
+            <p class="faq-eyebrow">FAQ</p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <p class="faq-intro">
+                Find answers to some of the most common questions about our
+                services, process and collaboration.
+            </p>
+        </div>
+
+        <!-- =========================================
+         FAQ LISTE
+         ========================================= -->
+
+        <div class="faq-list">
+            {
+                faqs.map((faq) => (
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-question">{faq.question}</span>
+
+                            <span class="faq-icon">+</span>
+                        </summary>
+
+                        <div class="faq-answer">
+                            <p>{faq.answer}</p>
+                        </div>
+                    </details>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* =========================================
+   FAQ SEKTION
+   ========================================= */
+
+    .faq {
+        width: 100%;
+        padding: 2rem 1rem;
+        background-color: #ffffff;
+    }
+
+    /* =========================================
+   CONTAINER
+   ========================================= */
+
+    .faq-container {
+        width: min(850px, 100%);
+        margin: 0 auto;
+    }
+
+    /* =========================================
+   HEADER
+   ========================================= */
+
+    .faq-header {
+        text-align: center;
+        max-width: 650px;
+        margin: 0 auto 4rem;
+    }
+
+    /* =========================================
+   EYEBROW
+   ========================================= */
+
+    .faq-eyebrow {
+        margin: 0 0 0.75rem;
+        color: var(--color-blue-700);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    /* =========================================
+   OVERSKRIFT
+   ========================================= */
+
+    .faq-header h2 {
+        margin: 0 0 1rem;
+        color: #030712;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.1;
+    }
+
+    /* =========================================
+   INTRO TEKST
+   ========================================= */
+
+    .faq-intro {
+        margin: 0;
+        color: #6b7280;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    /* =========================================
+   FAQ LISTE
+   ========================================= */
+
+    .faq-list {
+        width: 100%;
+    }
+
+    /* =========================================
+   FAQ ITEM
+   ========================================= */
+
+    .faq-item {
+        border-top: 1px solid #dfe2e6;
+    }
+
+    /* Sidste linje får også en bund */
+    .faq-item:last-child {
+        border-bottom: 1px solid #dfe2e6;
+    }
+
+    /* =========================================
+   SPØRGSMÅL
+   ========================================= */
+
+    .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1.5rem 0;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    /* Fjerner standard pil */
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    /* =========================================
+   SPØRGSMÅLSTEKST
+   ========================================= */
+
+    .faq-question {
+        color: #030712;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    /* =========================================
+   PLUS IKON
+   ========================================= */
+
+    .faq-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background-color: var(--color-blue-700);
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 300;
+        line-height: 1;
+        transition:
+            transform 0.3s ease,
+            background-color 0.3s ease;
+    }
+
+    /* =========================================
+   NÅR FAQ ER ÅBEN
+   ========================================= */
+
+    .faq-item[open] .faq-icon {
+        transform: rotate(45deg);
+    }
+
+    /* =========================================
+   HOVER
+   ========================================= */
+
+    .faq-item summary:hover .faq-question {
+        color: var(--color-blue-700);
+    }
+
+    .faq-item summary:hover .faq-icon {
+        transform: scale(1.08);
+    }
+
+    /* Når den allerede er åben */
+    .faq-item[open] summary:hover .faq-icon {
+        transform: rotate(45deg) scale(1.08);
+    }
+
+    /* =========================================
+   SVAR
+   ========================================= */
+
+    .faq-answer {
+        padding: 0 4.5rem 1.5rem 0;
+    }
+
+    .faq-answer p {
+        margin: 0;
+        color: #6b7280;
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    /* =========================================
+   MOBIL
+   ========================================= */
+
+    @media (max-width: 600px) {
+        .faq {
+            padding: 5rem 1rem;
+        }
+
+        .faq-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .faq-item summary {
+            padding: 1.25rem 0;
+        }
+
+        .faq-question {
+            font-size: 0.95rem;
+        }
+
+        .faq-icon {
+            width: 32px;
+            height: 32px;
+
+            font-size: 1.3rem;
+        }
+
+        .faq-answer {
+            padding-right: 2rem;
+        }
+    }
+</style>

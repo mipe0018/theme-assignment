@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import aboutImg from "@assets/images/aboutImg.png";
+import checkmarkIcon from "../icons/checkmark.svg";
+---
+
+<section class="info">
+    <div class="info-inner">
+        <!-- Tekst -->
+        <div class="info-text">
+            <h2>OUR VISION</h2>
+
+            <h1>Turn your ideas into reality.</h1>
+
+            <p>
+                Capitalize on low hanging fruit to identify a ballpark value
+                added activity beta test. Override the digital divide with
+                additional from DevOps.
+            </p>
+            <div class="about-text">
+                <p class="about-text">
+                    <Image
+                        class="icon"
+                        src={checkmarkIcon}
+                        alt="ICON"
+                    />Bring to the table win-win survival strategies to ensure
+                    proactive domination. At the end of the day.
+                </p>
+            </div>
+            <div class="about-text">
+                <p class="about-text">
+                    <Image
+                        class="icon"
+                        src={checkmarkIcon}
+                        alt="ICON"
+                    />Capitalize on low hanging fruit to identify a ballpark
+                    value added activity to beta test override the digital.
+                </p>
+            </div>
+        </div>
+        <!-- Billede med grøn dekorationsboks -->
+        <div class="about-image">
+            <div class="green-box"></div>
+
+            <Image
+                class="about-img"
+                src={aboutImg}
+                alt="Info"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    @layer components {
+        /* Sectionen går i fuld bredde */
+        .info {
+            width: 100%;
+        }
+
+        /* Indholdet holdes i 1200px */
+        .info-inner {
+            width: min(75rem, 100%);
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Plads til den grønne boks */
+        .about-image {
+            position: relative;
+            padding: 1.25rem;
+        }
+
+        .about-img {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            border-radius: 25px;
+        }
+
+        /* Grøn boks bag billedet */
+        .green-box {
+            position: absolute;
+            width: 10rem;
+            height: 10rem;
+            top: -0.1rem;
+            right: -1rem;
+            background-color: var(--color-green-400);
+            z-index: 0;
+            border-radius: 25px;
+        }
+
+        .about-text {
+            display: flex;
+        }
+
+        .icon {
+            filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
+        }
+    }
+</style>
