@@ -1,0 +1,239 @@
+---
+/* @ts-nocheck bruges til at undgå TypeScript-fejl */
+
+// Importerer ValuesCard-komponenten
+import ValuesCard from "@components/ValuesCard.astro";
+
+// Henter data fra API'et
+const valuesData = await fetch("https://ftk-api.pages.dev/core-values").then(
+    (res) => res.json(),
+);
+
+// Vælger hvilken variant komponenten bruger
+// Kan senere ændres til "alternative"
+const variant = "default";
+---
+
+<section class={`values-section values-${variant}`}>
+    <div class="values-wrapper">
+        <!-- Header med tekst og Get in touch-knap -->
+        <div class="values-header">
+            <div class="values-text">
+                <!-- Eyebrow fra API'et -->
+                <p class="eyebrow">
+                    {valuesData.eyebrow}
+                </p>
+
+                <!-- Titel fra API'et -->
+                <h2>
+                    {valuesData.title}
+                </h2>
+
+                <!-- Undertitel fra API'et -->
+                <p class="subtitle">
+                    {valuesData.subtitle}
+                </p>
+            </div>
+
+            <!-- Get in touch-knap fra API'et -->
+            <a
+                class="values-button"
+                href={valuesData.button.link}
+            >
+                {valuesData.button.text}
+            </a>
+        </div>
+
+        <!-- Cards -->
+        <div class="values-cards">
+            {
+                valuesData.values.map((value: any) => (
+                    <ValuesCard
+                        value={value}
+                        variant={variant}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* =========================================
+       HELE SEKTIONEN
+    ========================================= */
+
+    .values-section {
+        /* Mørk baggrund */
+        background-color: #030712;
+
+        /* Afstand over og under indholdet */
+        padding: 4rem 0;
+
+        /* Gitterbaggrund */
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.04) 1px,
+                transparent 1px
+            );
+
+        background-size: 50px 50px;
+
+        /* Gør det muligt at placere fade ovenpå */
+        position: relative;
+
+        /* Sørger for at fade ikke går udenfor sektionen */
+        overflow: hidden;
+    }
+
+    .values-section::after {
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        pointer-events: none;
+
+        background: radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            #030712 100%
+        );
+    }
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .values-wrapper {
+        width: min(1200px, calc(100% - 2rem));
+
+        margin: 0 auto;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .values-header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: flex-end;
+
+        gap: 2rem;
+
+        margin-bottom: 2rem;
+    }
+
+    .values-text {
+        max-width: 650px;
+    }
+
+    /* Eyebrow */
+
+    .eyebrow {
+        margin: 0 0 0.5rem;
+
+        color: white;
+
+        text-transform: uppercase;
+
+        font-size: 0.75rem;
+
+        letter-spacing: 0.08em;
+    }
+
+    /* Titel */
+
+    .values-text h2 {
+        margin: 0 0 0.75rem;
+
+        color: white;
+    }
+
+    /* Undertitel */
+
+    .subtitle {
+        margin: 0;
+
+        color: #b5b8c0;
+
+        max-width: 600px;
+    }
+
+    /* =========================================
+       GET IN TOUCH KNAP
+    ========================================= */
+
+    .values-button {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 0.8rem 1.5rem;
+
+        background-color: white;
+
+        color: #030712;
+
+        border-radius: 999px;
+
+        text-decoration: none;
+
+        white-space: nowrap;
+
+        font-size: 0.9rem;
+    }
+
+    .values-button:hover {
+        opacity: 0.8;
+    }
+
+    /* =========================================
+       CARDS
+    ========================================= */
+
+    .values-cards {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    /* =========================================
+       TABLET
+    ========================================= */
+
+    @media (max-width: 900px) {
+        .values-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* =========================================
+       MOBIL
+    ========================================= */
+
+    @media (max-width: 600px) {
+        .values-header {
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
+
+        .values-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

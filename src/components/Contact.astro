@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+import InfoImg from "@assets/images/InfoImg.png";
+---
+
+<section class="contact-info">
+    <div class="contact-info-inner">
+        <!-- Tekst -->
+        <div class="info-text">
+            <h2>Process</h2>
+
+            <h1>Contact Us. It’s Easy.</h1>
+
+            <p>
+                Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative.
+            </p>
+
+       <div></div>
+
+    <div></div>
+
+    <div></div>
+    
+        </div>
+        <!-- Billede med grøn dekorationsboks -->
+        <div class="info-image">
+            <div class="green-box"></div>
+
+            <Image
+                class="info-img"
+                src={InfoImg}
+                alt="Info"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    @layer components {
+        /* Sectionen går i fuld bredde */
+     /*   .contant-info {
+            width: 100%;
+            margin-top: 10rem;
+        }*/
+
+        /* Indholdet holdes i 1200px */
+      /*  .contact-info-inner {
+            width: min(1200px, 100%);
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }*/
+
+        /* Plads til den grønne boks */
+       /* .info-image {
+            position: relative;
+            padding: 1.25rem;
+        }*/
+
+       /* .info-img {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            border-radius: 25px;
+        }*/
+
+        /* Grøn boks bag billedet */
+       /* .green-box {
+            position: absolute;
+            width: 10rem;
+            height: 10rem;
+
+            top: -0.5rem;
+            left: -0.5rem;
+            background-color: var(--color-green-400);
+            z-index: 0;
+            border-radius: 25px;
+        }
+
+        .info-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .info-text h1,
+        .info-text h2,
+        .info-text p {
+            margin: 0;
+        }
+
+        .info-text h2 {
+            font-size: 1rem;
+        }
+
+        .info-text h1 {
+            font-size: 1.8rem;
+        }
+
+        .info-text p {
+            line-height: 1.6;
+        }
+    }*/
+</style>
