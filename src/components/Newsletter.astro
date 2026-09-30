@@ -32,13 +32,13 @@
             grid-column: a / d;
             width: 100%;
             margin-top: 8rem;
-            min-height: 10rem;
+            margin-bottom: -4rem;
             background-color: var(--color-neutrals-900);
         }
 
         /* Begrænser indholdet til maks. 1200px */
         .newsletter-inner {
-            width: min(1200px, 100%);
+            width: min(75rem, 100%);
             margin-inline: auto;
             padding-block: 4rem;
             display: flex;
@@ -107,17 +107,18 @@
                 box-shadow 0.2s ease;
         }
 
-button {
-    background-color: var(--color-surface-highlight);
-    font-family: var(--font-heading);
-    padding: 4px 16px;
-    border: none;
-    border-radius: 999px;
-    font-size: 1rem;
-    transition: background-color 0.15s ease;
-}
+        button {
+            background-color: var(--color-surface-highlight);
+            font-family: var(--font-heading);
+            padding: 4px 16px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1rem;
+            transition: background-color 0.15s ease;
+        }
 
-button:hover {
-    opacity: 0.8;
+        button:hover {
+            opacity: 0.8;
+        }
     }
 </style>
