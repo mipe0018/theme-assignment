@@ -9,9 +9,12 @@ const valuesData = await fetch("https://ftk-api.pages.dev/core-values").then(
     (res) => res.json(),
 );
 
-// Vælger hvilken variant komponenten bruger
-// Kan senere ændres til "alternative"
-const variant = "default";
+// Modtager variant fra den side, hvor komponenten bruges
+interface Props {
+    variant?: "default" | "alternative";
+}
+
+const { variant = "default" } = Astro.props;
 ---
 
 <section class={`values-section values-${variant}`}>
@@ -48,29 +51,25 @@ const variant = "default";
         <div class="values-cards">
             {
                 valuesData.values.map((value: any) => (
-                    <ValuesCard
-                        value={value}
-                        variant={variant}
-                    />
+                    <ValuesCard value={value} />
                 ))
             }
         </div>
     </div>
+    ```
 </section>
 
 <style>
     /* =========================================
        HELE SEKTIONEN
+       NORMAL VERSION
     ========================================= */
 
     .values-section {
-        /* Mørk baggrund */
         background-color: #030712;
 
-        /* Afstand over og under indholdet */
         padding: 4rem 0;
 
-        /* Gitterbaggrund */
         background-image:
             linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
             linear-gradient(
@@ -81,12 +80,30 @@ const variant = "default";
 
         background-size: 50px 50px;
 
-        /* Gør det muligt at placere fade ovenpå */
         position: relative;
-
-        /* Sørger for at fade ikke går udenfor sektionen */
         overflow: hidden;
     }
+
+    /* =========================================
+       ALTERNATIVE VERSION
+       
+       Denne ændrer KUN den store baggrund
+       BAG kortene.
+       
+       Kortene ændres ikke.
+    ========================================= */
+
+    .values-section.values-alternative {
+        background-color: #d9d9d9 !important;
+
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+    }
+
+    /* =========================================
+       NORMAL FADE
+    ========================================= */
 
     .values-section::after {
         content: "";
@@ -104,14 +121,42 @@ const variant = "default";
     }
 
     /* =========================================
+       ALTERNATIVE FADE
+       
+       Sørger for at det mørke fade ikke
+       lægger sig ovenpå den grå baggrund.
+    ========================================= */
+
+    .values-section.values-alternative::after {
+        background: radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            #d9d9d9 100%
+        );
+    }
+    /* =========================================
+   TEKST TIL ALTERNATIVE VERSION
+   ========================================= */
+
+    .values-section.values-alternative .eyebrow {
+        color: #030712;
+    }
+
+    .values-section.values-alternative .values-text h2 {
+        color: #030712;
+    }
+
+    .values-section.values-alternative .subtitle {
+        color: #030712;
+    }
+
+    /* =========================================
        CONTENT
     ========================================= */
 
     .values-wrapper {
         width: min(75rem, calc(100% - 2rem));
-
         margin: 0 auto;
-
         position: relative;
         z-index: 1;
     }
@@ -132,7 +177,9 @@ const variant = "default";
         max-width: 650px;
     }
 
-    /* Eyebrow */
+    /* =========================================
+       EYEBROW
+    ========================================= */
 
     .eyebrow {
         margin: 0 0 0.5rem;
@@ -142,14 +189,18 @@ const variant = "default";
         letter-spacing: 0.08em;
     }
 
-    /* Titel */
+    /* =========================================
+       TITEL
+    ========================================= */
 
     .values-text h2 {
         margin: 0 0 0.75rem;
         color: white;
     }
 
-    /* Undertitel */
+    /* =========================================
+       UNDERTITEL
+    ========================================= */
 
     .subtitle {
         margin: 0;
