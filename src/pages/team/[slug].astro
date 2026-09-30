@@ -1,30 +1,89 @@
 ---
-//@ts-nocheck
+/* @ts-nocheck bruges til at undgå TypeScript-fejl */
+
 import { getTeamMembers } from "@lib/api";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 
 export async function getStaticPaths() {
+  // Henter alle teammedlemmer fra API'et
   const team = await getTeamMembers();
 
-  return team.map((employee) => ({
-    params: { slug: employee.slug },
-    props: { employee },
+  // Opretter en dynamisk side for hver medarbejder
+  return team.map((employee: any) => ({
+    params: {
+      slug: employee.slug,
+    },
+
+    props: {
+      employee: employee,
+    },
   }));
 }
 
-const { employee } = Astro.props;
+// Henter medarbejderen fra props
+const { employee }: { employee: any } = Astro.props;
 ---
 
 <Layout>
-  <Image
-    src={employee.image.src}
-    alt={employee.image.alt}
-    width={employee.image.width}
-    height={employee.image.height}
-  />
-  <h2>{employee.name}</h2>
-  <p>{employee.description_long}</p>
-  <h3>Past Experience</h3>
-  <p>{employee.past_experience}</p>
+  <main class="team-page">
+    <!-- Tilbage til team-siden -->
+    <a
+      href="/team"
+      class="back-link"
+    >
+      ← Back to team
+    </a>
+
+    <!-- Hovedindhold -->
+    <section class="team-detail">
+      <!-- Billede -->
+      <div class="team-image">
+        <Image
+          src={employee.image.src}
+          alt={employee.image.alt}
+          width={employee.image.width}
+          height={employee.image.height}
+        />
+      </div>
+
+      <!-- Information -->
+      <div class="team-info">
+        <!-- Jobtitel -->
+        <p class="eyebrow">
+          {employee.title}
+        </p>
+
+        <!-- Navn -->
+        <h1>
+          {employee.name}
+        </h1>
+
+        <!-- Kort beskrivelse -->
+        <p class="intro">
+          {employee.description}
+        </p>
+
+        <!-- Lang beskrivelse -->
+        <div class="info-section">
+          <h2>
+            About {employee.name}
+          </h2>
+
+          <p>
+            {employee.description_long}
+          </p>
+        </div>
+
+        <!-- Tidligere erfaring -->
+        <div class="info-section">
+          <h2>Past Experience</h2>
+
+          <p>
+            {employee.past_experience}
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

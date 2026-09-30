@@ -1,0 +1,96 @@
+---
+/* @ts-nocheck bruges til at undgå TypeScript-fejl */
+
+// Importerer TeamsCard-komponenten
+import TeamsCard from "@components/TeamsCard.astro";
+
+// Henter team-data fra API'et
+const TeamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
+    res.json(),
+);
+---
+
+<div class="teams-wrapper">
+    <!-- Header med tekst -->
+    <div class="teams-header">
+        <div class="teams-text">
+            <!-- Overskrift -->
+            <p class="eyebrow">OUR TEAM</p>
+            <h1>Meet Our Team</h1>
+            <p>
+                Meet the people behind our company and the experience they bring
+                to the team.
+            </p>
+        </div>
+    </div>
+
+    <!-- Grid med alle team cards -->
+    <div class="teams-cards">
+        {TeamsData.map((team: any) => <TeamsCard team={team} />)}
+    </div>
+</div>
+
+<style>
+    /* Hele team-sektionen */
+    .teams-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .teams-header {
+        margin-bottom: 2rem;
+    }
+
+    .teams-text {
+        max-width: 650px;
+    }
+
+    /* Lille overskrift */
+    .eyebrow {
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    /* Hovedoverskrift */
+    .teams-text h1 {
+        margin: 0 0 1rem;
+    }
+
+    /* Beskrivelse */
+    .teams-text p:last-child {
+        margin: 0;
+    }
+
+    /* Grid med team cards */
+    .teams-cards {
+        display: grid;
+
+        /* 3 cards på hver række */
+        grid-template-columns: repeat(3, 1fr);
+
+        /* Afstand mellem cards */
+        gap: 2rem;
+
+        /* Sørger for at grid'et ikke bliver bredere end 1200px */
+        width: 100%;
+    }
+
+    /* Tablet */
+    @media (max-width: 900px) {
+        .teams-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* Mobil */
+    @media (max-width: 600px) {
+        .teams-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

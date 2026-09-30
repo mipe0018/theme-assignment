@@ -1,0 +1,115 @@
+---
+interface Props {
+    team: {
+        id: number;
+        name: string;
+        title: string;
+        description: string;
+        slug: string;
+        image: {
+            src: string;
+            alt: string;
+            width: number;
+            height: number;
+        };
+    };
+}
+
+const { team } = Astro.props;
+---
+
+<article class="teams-card">
+    <!-- Billede -->
+    <div class="team-image">
+        <img
+            src={team.image.src}
+            alt={team.image.alt}
+            width={team.image.width}
+            height={team.image.height}
+        />
+    </div>
+
+    <!-- Information -->
+    <div class="team-content">
+        <h2>{team.name}</h2>
+
+        <p class="team-title">
+            {team.title}
+        </p>
+
+        <p class="team-description">
+            {team.description}
+        </p>
+
+        <!-- Link til den dynamiske slug-side -->
+        <a
+            href={`/team/${team.slug}`}
+            class="team-button"
+        >
+            Read more
+        </a>
+    </div>
+</article>
+
+<style>
+    .teams-card {
+        overflow: hidden;
+        background-color: #e5e5e5;
+        border-radius: 25px;
+    }
+
+    .team-image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+    }
+
+    .team-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .team-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+    }
+
+    .team-content h2 {
+        margin: 0;
+    }
+
+    .team-title {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .team-description {
+        margin: 0 0 1rem;
+        line-height: 1.6;
+    }
+
+    .team-button {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.75rem 1.5rem;
+
+        background-color: var(--color-blue-700);
+        color: white;
+
+        border-radius: 999px;
+
+        text-decoration: none;
+        font-weight: 600;
+
+        transition: 0.2s ease;
+    }
+
+    .team-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.85;
+    }
+</style>

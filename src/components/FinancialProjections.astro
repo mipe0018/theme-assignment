@@ -160,10 +160,8 @@ const financialData = await fetch(
     .financial-header {
         display: flex;
         justify-content: space-between;
-
         /* Knapperne flugter med bunden */
         align-items: flex-end;
-
         margin-bottom: 2rem;
     }
 
@@ -184,7 +182,7 @@ const financialData = await fetch(
     }
 
 
-    /* --- Carousel-knapper --- */
+
 
 /* --- Carousel-knapper --- */
 .carousel-buttons {
@@ -215,9 +213,7 @@ const financialData = await fetch(
         opacity: 0.8;
     }
 
-
     /* --- Cards / carousel --- */
-
     .financial-cards {
         display: flex;
 
@@ -258,7 +254,6 @@ const financialData = await fetch(
     @media (max-width: 800px) {
 
         .financial-header {
-
             /* Header bliver lodret på mindre skærme */
             flex-direction: column;
             align-items: flex-start;
@@ -266,7 +261,6 @@ const financialData = await fetch(
         }
 
         .financial-card-wrapper {
-
             /* På mobil vises ét card ad gangen */
             flex: 0 0 85%;
         }
