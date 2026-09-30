@@ -1,0 +1,386 @@
+---
+import { Image } from "astro:assets";
+
+// Billeder
+import ContactImgOne from "@assets/images/contactimg1.png";
+import ContactImgTwo from "@assets/images/contactimg2.png";
+import ContactImgThree from "@assets/images/contactimg3.png";
+
+// Ikoner
+import IconPhone from "../icons/phone.svg";
+import IconClock from "../icons/clock.svg";
+import IconPin from "../icons/pin.svg";
+---
+
+<section class="contact-info">
+    <div class="contact-info-inner">
+        <!-- TEKST / VENSTRE KOLONNE -->
+        <div class="info-text">
+            <h2>Process</h2>
+
+            <h1>Contact Us. It’s Easy.</h1>
+
+            <p>
+                Leverage agile frameworks to provide a robust synopsis for high
+                level overviews. Iterative approaches to corporate strategy
+                foster collaborative.
+            </p>
+
+            <!-- Telefon -->
+            <div class="info-icon">
+                <div class="icon-circle phone-circle">
+                    <Image
+                        class="contact-icon"
+                        src={IconPhone}
+                        alt="Phone"
+                    />
+                </div>
+
+                <div class="icon-text">
+                    <h2>Call Today</h2>
+                    <h3>+1 800 100 900</h3>
+                </div>
+            </div>
+
+            <!-- Åbningstider -->
+            <div class="info-icon">
+                <div class="icon-circle clock-circle">
+                    <Image
+                        class="contact-icon"
+                        src={IconClock}
+                        alt="Clock"
+                    />
+                </div>
+
+                <div class="icon-text">
+                    <h2>Monday To Friday</h2>
+                    <h3>9AM - 5PM</h3>
+                </div>
+            </div>
+
+            <!-- Adresse -->
+            <div class="info-icon">
+                <div class="icon-circle pin-circle">
+                    <Image
+                        class="contact-icon"
+                        src={IconPin}
+                        alt="Location"
+                    />
+                </div>
+
+                <div class="icon-text">
+                    <h2>USA Office</h2>
+                    <h3>195 Devonshire St Boston, MA 02110</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- STORT BILLEDE / MIDTERSTE KOLONNE -->
+        <div class="ContactImgLarge">
+            <!-- Grøn boks bag billedet -->
+            <div class="green-box"></div>
+
+            <Image
+                class="contact-img"
+                src={ContactImgOne}
+                alt="Contact"
+            />
+        </div>
+
+        <!-- LILLE BILLEDE ØVERST / HØJRE KOLONNE -->
+        <div class="ContactImgSmallTop">
+            <Image
+                class="contact-img"
+                src={ContactImgTwo}
+                alt="Contact"
+            />
+        </div>
+
+        <!-- LILLE BILLEDE NEDERST / HØJRE KOLONNE -->
+        <div class="ContactImgSmallBottom">
+            <Image
+                class="contact-img"
+                src={ContactImgThree}
+                alt="Contact"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    @layer components {
+        /* ========================================
+           SELVE SEKTIONEN
+           ======================================== */
+
+        .contact-info {
+            width: 100%;
+            margin-top: 10rem;
+        }
+
+        /* ========================================
+           1200PX GRID
+           ======================================== */
+
+        .contact-info-inner {
+            width: min(75rem, 100%);
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 250px 250px;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        /* ========================================
+           TEKST
+           ======================================== */
+
+        .info-text {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-text > h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-text > h1 {
+            margin: 0 0 1rem;
+        }
+
+        .info-text > p {
+            margin: 0 0 2rem;
+        }
+
+        /* ========================================
+           KONTAKT IKONER
+           ======================================== */
+
+        .info-icon {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========================================
+           RUNDE IKONER
+           ======================================== */
+
+        .icon-circle {
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        /* Telefon - grøn */
+
+        .phone-circle {
+            background-color: var(--color-green-400);
+        }
+
+        /* Åbningstider - orange */
+
+        .clock-circle {
+            background-color: #e8a15b;
+        }
+
+        /* Adresse - grå */
+
+        .pin-circle {
+            background-color: #b5b5b5;
+        }
+
+        /* ========================================
+           SELVE IKONERNE
+           ======================================== */
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            object-fit: contain;
+        }
+
+        /* ========================================
+           TEKST VED SIDEN AF IKONERNE
+           ======================================== */
+
+        .icon-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .icon-text h2,
+        .icon-text h3 {
+            margin: 0;
+        }
+
+        /* ========================================
+           STORT BILLEDE
+           ======================================== */
+
+        .ContactImgLarge {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Stort billede */
+
+        .ContactImgLarge .contact-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ========================================
+           GRØN BOKS
+           ======================================== */
+
+        .green-box {
+            position: absolute;
+            width: 20rem;
+            height: 9rem;
+            left: -2rem;
+            bottom: -1rem;
+            background-color: var(--color-green-400);
+            border-radius: 25px;
+            z-index: 0;
+        }
+
+        /* ========================================
+           LILLE BILLEDE 1
+           ======================================== */
+
+        .ContactImgSmallTop {
+            grid-column: 3;
+            grid-row: 1;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ========================================
+           LILLE BILLEDE 2
+           ======================================== */
+
+        .ContactImgSmallBottom {
+            grid-column: 3;
+            grid-row: 2;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ========================================
+           DE TO SMÅ BILLEDER
+           ======================================== */
+
+        .ContactImgSmallTop .contact-img,
+        .ContactImgSmallBottom .contact-img {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            border-radius: 25px;
+        }
+
+        /* ========================================
+           TABLET
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .contact-info-inner {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+            }
+
+            .info-text {
+                grid-column: 1 / 3;
+                grid-row: 1;
+            }
+
+            .ContactImgLarge {
+                grid-column: 1;
+                grid-row: 2 / 4;
+
+                min-height: 500px;
+            }
+
+            .ContactImgSmallTop {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .ContactImgSmallBottom {
+                grid-column: 2;
+                grid-row: 3;
+            }
+        }
+
+        /* ========================================
+           MOBIL
+           ======================================== */
+
+        @media (max-width: 600px) {
+            .contact-info-inner {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .info-text {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .ContactImgLarge {
+                grid-column: 1;
+                grid-row: 2;
+
+                min-height: 400px;
+            }
+
+            .ContactImgSmallTop {
+                grid-column: 1;
+                grid-row: 3;
+
+                min-height: 250px;
+            }
+
+            .ContactImgSmallBottom {
+                grid-column: 1;
+                grid-row: 4;
+
+                min-height: 250px;
+            }
+
+            .green-box {
+                width: 7rem;
+                height: 7rem;
+
+                left: -0.5rem;
+                bottom: -0.5rem;
+            }
+        }
+    }
+</style>

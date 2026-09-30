@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.png";
+---
+
+<header>
+    <div class="header-content">
+        <a href="/">
+            <Image
+                src={logo}
+                alt="Logo"
+            />
+        </a>
+
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="/case-studies">Case Studies</a>
+            <a href="/team">Team</a>
+            <a href="/about">About</a>
+        </div>
+
+        <button>Login</button>
+    </div>
+</header>
+
+<style>
+    header {
+        background-color: var(--color-neutrals-900);
+        grid-column: a / d;
+    }
+
+    .header-content {
+        max-width: 75rem;
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        padding: 20px;
+    }
+    .menu {
+        display: flex;
+        justify-content: center;
+    }
+    .menu a {
+        text-decoration: none;
+        color: var(--color-on-ui-primary);
+        font-family: var(--font-heading);
+        padding-inline: 2rem;
+    }
+
+    .header-content button {
+        background-color: var(--color-on-ui-primary);
+        font-family: var(--font-heading);
+        padding: 4px 16px;
+        border-radius: 999px;
+    }
+</style>

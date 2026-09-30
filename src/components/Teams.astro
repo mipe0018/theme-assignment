@@ -1,0 +1,159 @@
+---
+/* @ts-nocheck bruges til at undgå TypeScript-fejl */
+
+// Importerer TeamsCard-komponenten
+import TeamsCard from "@components/TeamsCard.astro";
+
+// Henter team-data fra API'et
+const TeamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
+    res.json(),
+);
+---
+
+<div class="teams-wrapper">
+    <!-- Header med tekst og knap -->
+    <div class="teams-header">
+        <div class="teams-text">
+            <!-- Lille overskrift -->
+            <p class="eyebrow">OUR TEAM</p>
+
+            <!-- Hovedoverskrift -->
+            <h1>Meet Our Team</h1>
+
+            <!-- Beskrivelse -->
+            <p>
+                Meet the people behind our company and the experience they bring
+                to the team.
+            </p>
+        </div>
+
+        <!-- Join our team knap -->
+        <a
+            href="/contact"
+            class="join-button"
+        >
+            Join Our Team
+        </a>
+    </div>
+
+    <!-- Grid med alle team cards -->
+    <div class="teams-cards">
+        {TeamsData.map((team: any) => <TeamsCard team={team} />)}
+    </div>
+</div>
+
+<style>
+    /* Hele team-sektionen */
+    .teams-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header med tekst + knap */
+    .teams-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        gap: 2rem;
+
+        margin-bottom: 2rem;
+    }
+
+    /* Tekst */
+    .teams-text {
+        max-width: 650px;
+    }
+
+    /* Lille overskrift */
+    .eyebrow {
+        margin-bottom: 0.5rem;
+
+        font-size: 0.85rem;
+        font-weight: 700;
+
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    /* Hovedoverskrift */
+    .teams-text h1 {
+        margin: 0 0 1rem;
+    }
+
+    /* Beskrivelse */
+    .teams-text p:last-child {
+        margin: 0;
+    }
+
+    /* Join our team knap */
+    .join-button {
+        flex-shrink: 0;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1rem 1.75rem;
+
+        background-color: var(--color-blue-700);
+        color: white;
+
+        border-radius: 999px;
+
+        text-decoration: none;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+    .join-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.85;
+    }
+
+    /* Grid med team cards */
+    .teams-cards {
+        display: grid;
+
+        /* 3 cards på hver række */
+        grid-template-columns: repeat(3, 1fr);
+
+        /* Afstand mellem cards */
+        gap: 2rem;
+
+        width: 100%;
+    }
+
+    /* Tablet */
+    @media (max-width: 900px) {
+        .teams-header {
+            align-items: flex-start;
+        }
+
+        .teams-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* Mobil */
+    @media (max-width: 600px) {
+        .teams-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .join-button {
+            margin-top: 0.5rem;
+        }
+
+        .teams-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
