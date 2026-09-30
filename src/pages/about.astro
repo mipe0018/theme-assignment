@@ -76,7 +76,7 @@ const selectedTeams = teamsData.slice(0, 2);
           href="/team"
           class="join-team-button"
         >
-          Join our team
+          Meet the Team
         </a>
       </div>
 
@@ -209,8 +209,8 @@ const selectedTeams = teamsData.slice(0, 2);
   .about-team-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .about-team-content span {
@@ -243,19 +243,13 @@ const selectedTeams = teamsData.slice(0, 2);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     width: fit-content;
-
     padding: 0.9rem 1.5rem;
-
     color: white;
     background-color: var(--color-blue-700);
-
     border-radius: 999px;
-
     text-decoration: none;
     font-weight: 700;
-
     transition:
       transform 0.2s ease,
       opacity 0.2s ease;
