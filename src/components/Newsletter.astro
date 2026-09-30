@@ -5,39 +5,42 @@
 <section class="newsletter">
     <div class="newsletter-inner">
         <h2>STAY UPDATED</h2>
-
         <h1>Subscribe Our Newsletter</h1>
-
         <p>
             Build stronger Customer Relationships with <span>Consultalk</span>
         </p>
 
+        ```
+        <!-- Formular med inputfelt til email og subscribe-knap -->
         <div class="newsletter-form">
-            <button>your mail address</button>
+            <!-- Brugeren indtaster sin emailadresse her -->
+            <input
+                type="email"
+                placeholder="Your email address"
+            />
+            <!-- Sender formularen -->
             <button>Subscribe</button>
         </div>
     </div>
+    ```
 </section>
 
 <style>
     @layer components {
-        /* Blå baggrund i fuld bredde */
+        /* Sektionen går i fuld bredde */
         .newsletter {
             grid-column: a / d;
             width: 100%;
             margin-top: 8rem;
             min-height: 10rem;
-
             background-color: var(--color-neutrals-900);
         }
 
-        /* Indholdet holdes i 1200px */
+        /* Begrænser indholdet til maks. 1200px */
         .newsletter-inner {
             width: min(1200px, 100%);
             margin-inline: auto;
-
             padding-block: 4rem;
-
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -50,39 +53,71 @@
             margin: 0;
         }
 
+        /* Lille overskrift */
         .newsletter-inner h2 {
             font-size: 0.9rem;
             color: var(--color-surface-highlight);
         }
 
+        /* Hovedoverskrift */
         .newsletter-inner h1 {
             color: var(--color-on-ui-primary);
         }
 
-        /* Det ord, der skal være gult */
-        .newsletter-inner h1 span {
-            color: var(--color-accent);
-        }
-
+        /* Teksten under overskriften */
         .newsletter-inner p {
             color: var(--color-text-muted);
         }
 
+        /* Fremhæver Consultalk */
         .newsletter-inner p span {
             color: var(--color-surface-highlight);
         }
 
+        /* Placering af inputfelt og knap */
         .newsletter-form {
             display: flex;
             gap: 0.75rem;
             margin-top: 1.5rem;
         }
 
-        button {
-            background-color: var(--color-on-ui-primary);
+        /* Emailfeltet er dobbelt så bredt som knappen */
+        input {
+            width: 200px;
+            background-color: var(--color-neutrals-900);
             font-family: var(--font-heading);
             padding: 4px 16px;
+            border: none;
             border-radius: 999px;
+            font-size: 1rem;
+            border: 1px solid var(--color-on-ui-primary-muted);
+            color: var(--color-on-ui-primary-muted);
         }
+
+        /* Subscribe-knappen */
+        button {
+            background-color: var(--color-action);
+            font-family: var(--font-heading);
+            padding: 4px 16px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1rem;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+button {
+    background-color: var(--color-surface-highlight);
+    font-family: var(--font-heading);
+    padding: 4px 16px;
+    border: none;
+    border-radius: 999px;
+    font-size: 1rem;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    opacity: 0.8;
     }
 </style>

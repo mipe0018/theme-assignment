@@ -1,0 +1,192 @@
+---
+interface Props {
+    value: {
+        icon: string;
+
+        title: string;
+
+        description: string;
+
+        link?: {
+            text: string;
+
+            url: string;
+        };
+    };
+
+    variant?: "default" | "alternative";
+}
+
+const { value, variant = "default" } = Astro.props;
+
+// Finder SVG-ikonerne i src/icons
+const iconFiles = import.meta.glob("../icons/*.svg", {
+    eager: true,
+
+    query: "?url",
+
+    import: "default",
+});
+
+// Finder det ikon, som API'et sender navnet på
+const icon = iconFiles[`../icons/${value.icon}.svg`];
+---
+
+<article class={`values-card card-${variant}`}>
+    <!-- Rund blå cirkel med ikon -->
+    <div class="values-icon">
+        {
+            icon && (
+                <img
+                    src={icon}
+                    alt=""
+                />
+            )
+        }
+    </div>
+
+    <!-- Titel -->
+    <h3>
+        {value.title}
+    </h3>
+
+    <!-- Beskrivelse -->
+    <p>
+        {value.description}
+    </p>
+
+    <!-- Read More link -->
+    {
+        value.link && (
+            <a
+                class="values-link"
+                href={value.link.url}
+            >
+                {value.link.text}
+
+                <span aria-hidden="true">→</span>
+            </a>
+        )
+    }
+</article>
+
+<style>
+    /* =========================================
+       CARD
+    ========================================= */
+
+    .values-card {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0.75rem;
+
+        padding: 1.25rem;
+
+        background-color: #f1f2f4;
+
+        border-radius: 12px;
+
+        min-height: 185px;
+    }
+
+    /* =========================================
+       BLÅ RUNDE MED IKON
+    ========================================= */
+
+    .values-icon {
+        width: 32px;
+
+        height: 32px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        /* Blå farve */
+        background-color: var(--color-blue-700);
+
+        /* Gør den rund */
+        border-radius: 50%;
+
+        /* Sørger for at cirklen ikke bliver klemt */
+        flex-shrink: 0;
+    }
+
+    /* =========================================
+       SELVE SVG-IKONET
+    ========================================= */
+
+    .values-icon img {
+        width: 18px;
+        height: 18px;
+        display: block;
+        filter: brightness(0) invert(1);
+    }
+
+    /* =========================================
+       TITEL
+    ========================================= */
+
+    .values-card h3 {
+        margin: 0;
+
+        font-size: 1rem;
+    }
+
+    /* =========================================
+       BESKRIVELSE
+    ========================================= */
+
+    .values-card p {
+        margin: 0;
+
+        color: #666;
+
+        font-size: 0.85rem;
+
+        line-height: 2;
+    }
+
+    /* =========================================
+       READ MORE
+    ========================================= */
+
+    .values-link {
+        margin-top: auto;
+
+        color: #030712;
+
+        text-decoration: none;
+
+        font-size: 0.8rem;
+
+        font-weight: 600;
+    }
+
+    .values-link span {
+        margin-left: 0.25rem;
+    }
+
+    /* =========================================
+       HOVER
+    ========================================= */
+
+    .values-link:hover {
+        text-decoration: underline;
+    }
+
+    /* =========================================
+       VARIANT 2
+       
+       Her kan vi senere lave den alternative
+       version af komponenten.
+    ========================================= */
+
+    .card-alternative {
+        /* Variant 2 kan styles her */
+    }
+</style>
