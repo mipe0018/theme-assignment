@@ -16,100 +16,247 @@ interface Props {
 }
 
 const { team } = Astro.props;
+
+// Finder SVG-ikonerne i src/icons
+const iconFiles = import.meta.glob("../icons/*.svg", {
+    eager: true,
+    query: "?url",
+    import: "default",
+});
+
+// Finder ikonerne
+const instagramIcon = iconFiles["../icons/instagram.svg"];
+const facebookIcon = iconFiles["../icons/facebook.svg"];
 ---
 
-<article class="teams-card">
-    <!-- Billede -->
-    <div class="team-image">
-        <img
-            src={team.image.src}
-            alt={team.image.alt}
-            width={team.image.width}
-            height={team.image.height}
-        />
-    </div>
+<a
+    href={`/team/${team.slug}`}
+    class="team-button"
+>
+    <article class="teams-card">
+        <!-- Billede -->
+        <div class="team-image">
+            <img
+                src={team.image.src}
+                alt={team.image.alt}
+                width={team.image.width}
+                height={team.image.height}
+            />
 
-    <!-- Information -->
-    <div class="team-content">
-        <h2>{team.name}</h2>
+            <!-- Read more -->
+            <div class="read-more">Read more →</div>
 
-        <p class="team-title">
-            {team.title}
-        </p>
+            <!-- Jobtitel -->
+            <div class="team-title">
+                {team.title}
+            </div>
+        </div>
 
-        <p class="team-description">
-            {team.description}
-        </p>
+        <!-- Indhold -->
+        <div class="team-content">
+            <!-- Navn -->
+            <h2>
+                {team.name}
+            </h2>
 
-        <!-- Link til den dynamiske slug-side -->
-        <a
-            href={`/team/${team.slug}`}
-            class="team-button"
-        >
-            Read more
-        </a>
-    </div>
-</article>
+            <!-- Beskrivelse -->
+            <p class="team-description">
+                {team.description}
+            </p>
+
+            <!-- Sociale medier -->
+            <div class="social-icons">
+                {
+                    instagramIcon && (
+                        <img
+                            src={instagramIcon}
+                            alt="Instagram"
+                        />
+                    )
+                }
+
+                {
+                    facebookIcon && (
+                        <img
+                            src={facebookIcon}
+                            alt="Facebook"
+                        />
+                    )
+                }
+            </div>
+        </div>
+    </article>
+</a>
 
 <style>
+    /* ========================= */
+    /* LINK */
+    /* ========================= */
+
+    .team-button {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* ========================= */
+    /* CARD */
+    /* ========================= */
+
     .teams-card {
+        display: grid;
+
+        grid-template-rows: auto 1fr;
+
+        width: 100%;
+        height: 100%;
+
         overflow: hidden;
+
         background-color: #e5e5e5;
+
         border-radius: 25px;
     }
 
+    /* ========================= */
+    /* IMAGE */
+    /* ========================= */
+
     .team-image {
+        position: relative;
+
         width: 100%;
+
         aspect-ratio: 1 / 1;
+
         overflow: hidden;
+
+        border-radius: 25px 25px 0 0;
     }
 
     .team-image img {
+        display: block;
+
         width: 100%;
         height: 100%;
+
         object-fit: cover;
-        display: block;
+
+        transition: transform 0.3s ease;
     }
+
+    .team-button:hover .team-image img {
+        transform: scale(1.03);
+    }
+
+    /* ========================= */
+    /* READ MORE */
+    /* ========================= */
+
+    .read-more {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        z-index: 2;
+
+        padding: 0.8rem 1.3rem;
+
+        color: white;
+
+        background-color: var(--color-blue-700);
+
+        font-size: 0.9rem;
+        font-weight: 700;
+
+        border-radius: 0 0 18px 0;
+    }
+
+    /* ========================= */
+    /* TITLE */
+    /* ========================= */
+
+    .team-title {
+        position: absolute;
+
+        right: 15px;
+        bottom: 15px;
+
+        z-index: 2;
+
+        padding: 0.65rem 1.1rem;
+
+        color: white;
+
+        background-color: rgba(0, 0, 0, 0.65);
+
+        border-radius: 999px;
+
+        font-size: 0.85rem;
+        font-weight: 600;
+
+        backdrop-filter: blur(5px);
+    }
+
+    /* ========================= */
+    /* CONTENT */
+    /* ========================= */
 
     .team-content {
         display: flex;
+
         flex-direction: column;
-        gap: 0.5rem;
+
+        min-height: 260px;
+
         padding: 1.5rem;
     }
 
     .team-content h2 {
-        margin: 0;
+        margin: 0 0 0.5rem;
     }
 
-    .team-title {
-        margin: 0;
-        font-weight: 600;
-    }
+    /* Beskrivelsen får et fast område */
 
     .team-description {
-        margin: 0 0 1rem;
+        margin: 0;
+
         line-height: 1.6;
+
+        min-height: 5.2em;
     }
 
-    .team-button {
-        display: inline-block;
-        width: fit-content;
-        padding: 0.75rem 1.5rem;
+    /* ========================= */
+    /* SOCIAL ICONS */
+    /* ========================= */
 
-        background-color: var(--color-blue-700);
-        color: white;
+    .social-icons {
+        display: flex;
 
-        border-radius: 999px;
+        justify-content: center;
+        align-items: center;
 
-        text-decoration: none;
-        font-weight: 600;
+        gap: 1.5rem;
 
-        transition: 0.2s ease;
+        margin-top: auto;
+        padding-top: 1.5rem;
     }
 
-    .team-button:hover {
-        transform: translateY(-2px);
-        opacity: 0.85;
+    .social-icons img {
+        width: 38px;
+        height: 38px;
+
+        object-fit: contain;
+
+        transition: transform 0.2s ease;
+    }
+
+    .social-icons img:hover {
+        transform: scale(1.1);
     }
 </style>
