@@ -4,3 +4,13 @@
 @import url("./global.css") layer(global);
 @import url("./tokens.css") layer(tokens);
 @import url("./overrides.css") layer(overrides);
+
+/*skift mellem sider fader ud og ind */
+
+::view-transition-old(root) {
+  animation: fade-out 0.5s ease;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.5s ease;
+}

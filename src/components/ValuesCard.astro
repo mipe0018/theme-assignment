@@ -1,4 +1,5 @@
 ---
+import ArrowRight from "@icons/arrow--right.svg";
 interface Props {
     value: {
         icon: string;
@@ -64,7 +65,9 @@ const icon = iconFiles[`../icons/${value.icon}.svg`];
             >
                 {value.link.text}
 
-                <span aria-hidden="true">→</span>
+                <span aria-hidden="true">
+                    <ArrowRight class="arrow" />
+                </span>
             </a>
         )
     }
@@ -117,7 +120,9 @@ const icon = iconFiles[`../icons/${value.icon}.svg`];
 
     .values-card h3 {
         margin: 0;
-        font-size: 1rem;
+        color: var(--color-text);
+        font: var(--button-sm);
+        letter-spacing: 0.5;
     }
 
     /* =========================================
@@ -126,9 +131,10 @@ const icon = iconFiles[`../icons/${value.icon}.svg`];
 
     .values-card p {
         margin: 0;
-        color: #666;
-        font-size: 0.85rem;
-        line-height: 2;
+        line-height: 1.6;
+        font: var(--body-lg);
+        color: var(--color-text-muted);
+        padding-bottom: 1rem;
     }
 
     /* =========================================
@@ -136,11 +142,13 @@ const icon = iconFiles[`../icons/${value.icon}.svg`];
     ========================================= */
 
     .values-link {
+        display: flex;
         margin-top: auto;
-        color: #030712;
         text-decoration: none;
-        font-size: 0.8rem;
-        font-weight: 600;
+        color: var(--color-text);
+        font: var(--button-sm);
+        letter-spacing: 0.5;
+        gap: 0.5rem;
     }
 
     .values-link span {
@@ -153,5 +161,10 @@ const icon = iconFiles[`../icons/${value.icon}.svg`];
 
     .values-link:hover {
         text-decoration: underline;
+    }
+
+    .arrow {
+        width: 1rem;
+        height: 1rem;
     }
 </style>

@@ -1,5 +1,7 @@
 ---
-//@ts-nocheck
+// @ts-nocheck
+
+import ArrowRight from "@icons/arrow--right.svg";
 import { getCaseStudies } from "@lib/api";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
@@ -8,86 +10,518 @@ export async function getStaticPaths() {
   const caseStudies = await getCaseStudies();
 
   return caseStudies.map((caseStudy) => ({
-    params: { slug: caseStudy.slug },
-    props: { caseStudy },
+    params: {
+      slug: caseStudy.slug,
+    },
+    props: {
+      caseStudy,
+    },
   }));
 }
 
-const { caseStudy } = Astro.props;
-const { caseName, category, date, image, buttonLabel } = caseStudy.caseDetails;
+const caseStudy = Astro.props.caseStudy;
+const caseDetails = caseStudy.caseDetails;
+const caseName = caseDetails.caseName;
+const category = caseDetails.category;
+const date = caseDetails.date;
+const image = caseDetails.image;
+const buttonLabel = caseDetails.buttonLabel;
+const sections = caseStudy.sections ?? [];
 ---
 
 <Layout>
-  <article class="case-story-article">
-    <header>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-      />
-      <div class="case-details">
-        <dl>
-          <div>
-            <dt>Case Name</dt>
-            <dd>{caseName}</dd>
-          </div>
-          <div>
-            <dt>Category</dt>
-            <dd class="category">{category}</dd>
-          </div>
-          <div>
-            <dt>Date</dt>
-            <dd class="date">{date}</dd>
-          </div>
-        </dl>
-        <a href="#0" class="button">{buttonLabel}</a>
+  <main class="case-study-page">
+    <section class="case-heading">
+      <p class="eyebrow">Case Study</p>
+
+      <h1>{caseName}</h1>
+
+      <p class="intro">
+        Explore the story, process and results behind this project.
+      </p>
+    </section>
+
+    <section class="case-hero">
+      <div class="case-hero-image">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+        />
       </div>
-    </header>
-    <section class="case-story-content">
+
+      <div class="case-info">
+        <div class="case-info-item">
+          <span>Case Name</span>
+
+          <strong>{caseName}</strong>
+        </div>
+
+        <div class="case-divider"></div>
+
+        <div class="case-info-item">
+          <span>Category</span>
+
+          <strong>{category}</strong>
+        </div>
+
+        <div class="case-divider"></div>
+
+        <div class="case-info-item">
+          <span>Date</span>
+
+          <strong>{date}</strong>
+        </div>
+
+        {
+          buttonLabel && (
+            <a
+              href="#case-content"
+              class="live-button"
+            >
+              {buttonLabel}
+              <span>
+                <ArrowRight class="arrow" />
+              </span>
+            </a>
+          )
+        }
+      </div>
+    </section>
+
+    <section
+      id="case-content"
+      class="case-content"
+    >
       {
-        caseStudy.sections.map((section, index) => (
-          <>
-            {index === 0 ? (
-              <h2>{section.title}</h2>
+        sections.map((caseSection, sectionIndex) => (
+          <article class="case-section">
+            {sectionIndex === 0 ? (
+              <h2>{caseSection.title}</h2>
             ) : (
-              <h3>{section.title}</h3>
+              <h3>{caseSection.title}</h3>
             )}
 
-            {Array.isArray(section.content) ? (
-              <>
-                {section.content.map((item) => (
-                  <p>{item}</p>
+            {Array.isArray(caseSection.content) ? (
+              <div class="case-text">
+                {caseSection.content.map((contentItem) => (
+                  <p>{contentItem}</p>
                 ))}
-              </>
+              </div>
             ) : (
-              <p>{section.content}</p>
+              <div class="case-text">
+                <p>{caseSection.content}</p>
+              </div>
             )}
-            {section.highlights && (
-              <ul>
-                {section.highlights.map((highlight) => (
-                  <li>{highlight}</li>
+
+            {caseSection.highlights && (
+              <ul class="case-highlights">
+                {caseSection.highlights.map((highlightItem) => (
+                  <li>{highlightItem}</li>
                 ))}
               </ul>
             )}
-            {section.image && (
-              <figure>
+
+            {caseSection.image && (
+              <figure class="case-image">
                 <Image
-                  src={section.image.src}
-                  alt={section.image.alt}
-                  width={section.image.width}
-                  height={section.image.height}
+                  src={caseSection.image.src}
+                  alt={caseSection.image.alt}
+                  width={caseSection.image.width}
+                  height={caseSection.image.height}
                 />
-                {section.image.caption && (
-                  <figcaption>{section.image.caption}</figcaption>
+
+                {caseSection.image.caption && (
+                  <figcaption>{caseSection.image.caption}</figcaption>
                 )}
               </figure>
             )}
-          </>
+          </article>
         ))
       }
     </section>
-  </article>
+  </main>
 </Layout>
 
-<style></style>
+<style>
+  /* =========================================
+     PAGE
+  ========================================= */
+
+  .case-study-page {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 75rem) 1fr;
+    width: 100%;
+    /*padding-bottom: 6rem;*/
+  }
+
+  /* =========================================
+     CASE HEADING
+  ========================================= */
+
+  .case-heading {
+    grid-column: 2;
+    width: 100%;
+    margin: 4rem auto 3rem;
+    text-align: center;
+  }
+
+  .case-heading .eyebrow {
+    font: var(--body-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .case-heading h1 {
+    font-size: 1.8rem;
+    font: var(--heading-lg);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .case-heading .intro {
+    max-width: 600px;
+    margin: 1.25rem auto 0;
+    line-height: 1.6;
+    font: var(--body-lg);
+    color: var(--color-text-muted);
+  }
+
+  /* =========================================
+     HERO
+  ========================================= */
+
+  .case-hero {
+    position: relative;
+    grid-column: 2;
+    width: 100%;
+    margin: 0 auto 8rem;
+  }
+
+  .case-hero-image {
+    width: 100%;
+    height: 25rem;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .case-hero-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* =========================================
+     CASE INFO
+  ========================================= */
+
+  .case-info {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: -38px;
+    transform: translateX(-50%);
+    width: min(780px, calc(100% - 80px));
+    height: 6rem;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    box-sizing: border-box;
+    background: var(--color-blue-700, #2563eb);
+    color: white;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.15);
+  }
+
+  .case-info-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .case-info-item span {
+    /* Lato - small */
+    font: var(--body-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-on-surface-elevated);
+  }
+
+  .case-info-item strong {
+    /* Lato - bold */
+    line-height: 1.6;
+    font: var(--body-lg);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 1.5;
+  }
+
+  .case-divider {
+    width: 1px;
+    height: 28px;
+    flex-shrink: 0;
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .live-button {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    background: white;
+    color: var(--color-blue-700, #2563eb);
+    text-decoration: none;
+    /* Lato - bold */
+    font: var(--body-bold);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .live-button span {
+    font-size: 1rem;
+    line-height: 1.6;
+    font: var(--body-lg);
+  }
+
+  .arrow {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* =========================================
+     CONTENT
+  ========================================= */
+
+  .case-content {
+    grid-column: 2;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .case-section {
+    width: 100%;
+    margin-bottom: 6rem; /*afstand i bunden*/
+  }
+
+  .case-section:last-child {
+    margin-bottom: 0rem;
+  }
+
+  .case-section h2 {
+    width: min(900px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+    /*typografi*/
+    font-family: var(--button-lg);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+  .case-section h3 {
+    width: min(900px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    /*typografi*/
+    font-size: 1.8rem;
+    font-family: var(--button-lg);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+  .case-text,
+  .case-highlights {
+    width: min(900px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* =========================================
+     CONTENT HEADINGS
+  ========================================= */
+
+  .case-section h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    /* Cabin - large heading */
+    font: var(--heading-lg);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .case-section h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    /* Cabin - medium heading */
+    font: var(--heading-md);
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* =========================================
+     BODY TEXT
+  ========================================= */
+
+  .case-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .case-text p {
+    margin: 0;
+    /* Lato - normal body */
+    font: var(--body-lg);
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+  }
+
+  /* =========================================
+     HIGHLIGHTS
+  ========================================= */
+
+  .case-highlights {
+    margin-top: 2rem;
+    padding-left: 1.5rem;
+  }
+
+  .case-highlights li {
+    margin-bottom: 0.75rem;
+    /* Lato - normal body */
+    font: var(--body-md);
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  /* =========================================
+     CONTENT IMAGE
+  ========================================= */
+
+  .case-image {
+    width: 100%;
+    margin: 3rem 0 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .case-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+
+    /* Gør billedet mørkere og mindre lyst */
+    filter: brightness(0.7);
+  }
+
+  /* Blød sort fade fra bunden af billedet */
+  .case-image::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0)
+    ); /*sort bundlinje på billedet*/
+    pointer-events: none;
+  }
+
+  /* Teksten oven på billedet */
+  .case-image figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Lato - small */
+    font: var(--body-sm);
+    color: var(--color-on-surface-elevated);
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    z-index: 1;
+  }
+
+  /* =========================================
+     MOBILE
+  ========================================= */
+
+  @media (max-width: 700px) {
+    .case-study-page {
+      grid-template-columns: 16px minmax(0, 1fr) 16px;
+    }
+
+    .case-heading {
+      grid-column: 2;
+      margin-top: 3rem;
+    }
+
+    .case-hero {
+      grid-column: 2;
+      margin-bottom: 8rem;
+    }
+
+    .case-hero-image {
+      height: 280px;
+      border-radius: 18px;
+    }
+
+    .case-info {
+      bottom: -90px;
+      width: calc(100% - 24px);
+      height: auto;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      border-radius: 14px;
+    }
+
+    .case-divider {
+      display: none;
+    }
+
+    .live-button {
+      margin-left: 0;
+      justify-content: center;
+    }
+
+    .case-content {
+      grid-column: 2;
+    }
+
+    .case-section {
+      margin-bottom: 4rem;
+    }
+
+    .case-section h2,
+    .case-section h3,
+    .case-text,
+    .case-highlights {
+      width: 100%;
+    }
+  }
+</style>

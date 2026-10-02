@@ -44,6 +44,7 @@ const { employee }: { employee: any } = Astro.props;
           alt={employee.image.alt}
           width={employee.image.width}
           height={employee.image.height}
+          transition:name={`team-image-${employee.slug}`}
         />
       </div>
 
@@ -126,12 +127,12 @@ const { employee }: { employee: any } = Astro.props;
 
   /* Jobtitel */
   .eyebrow {
-    margin: 0 0 1rem;
-    color: var(--color-blue-700);
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font: var(--body-sm);
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   /* Navn */
