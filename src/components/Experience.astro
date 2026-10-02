@@ -63,49 +63,60 @@ const experienceData: ExperienceData = await fetch(
 </section>
 
 <script>
-    const statFigures = document.querySelectorAll(".stat-list figure");
+    function startStatAnimation() {
+        const statFigures = document.querySelectorAll(".stat-list figure");
 
-    // Starter animationen, når cirklen bliver synlig på skærmen
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
 
-                const figure = entry.target;
-                const target = Number(figure.getAttribute("data-target"));
+                    const figure = entry.target;
+                    const target = Number(figure.getAttribute("data-target"));
+                    const number = figure.querySelector(".stat-number");
 
-                const number = figure.querySelector(".stat-number");
-                let value = 0;
+                    let value = 0;
 
-                // Tæller procenten op fra 0 til værdien fra API'et
-                const interval = setInterval(() => {
-                    value++;
-
-                    // Opdaterer værdien, som CSS bruger til cirklen
-                    figure.setAttribute("data-value", value.toString());
+                    // Sørger for at animationen altid starter fra 0
+                    figure.setAttribute("data-value", "0");
 
                     if (number) {
-                        number.textContent = value + "%";
+                        number.textContent = "0%";
                     }
 
-                    if (value >= target) {
-                        clearInterval(interval);
-                    }
-                }, 20);
+                    const interval = setInterval(() => {
+                        value++;
 
-                // Animationen kører kun én gang
-                observer.unobserve(figure);
-            });
-        },
-        {
-            // Animationen starter, når 40% er synligt
-            threshold: 0.4,
-        },
-    );
+                        figure.setAttribute("data-value", value.toString());
 
-    statFigures.forEach((figure) => {
-        observer.observe(figure);
-    });
+                        if (number) {
+                            number.textContent = value + "%";
+                        }
+
+                        if (value >= target) {
+                            clearInterval(interval);
+                        }
+                    }, 20);
+
+                    // Animationen kører kun én gang pr. besøg på siden
+                    observer.unobserve(figure);
+                });
+            },
+            {
+                threshold: 0.4,
+            },
+        );
+
+        statFigures.forEach((figure) => {
+            observer.observe(figure);
+        });
+    }
+
+    // Kører første gang siden indlæses
+    startStatAnimation();
+
+    // Kører igen når Astro navigerer tilbage til siden
+    document.addEventListener("astro:page-load", startStatAnimation);
 </script>
 
 <style>
