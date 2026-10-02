@@ -1,4 +1,6 @@
 ---
+//
+import { ClientRouter } from "astro:transitions";
 // Importerer dit overordnede CSS-stylesheet
 import "@styles/main.css";
 
@@ -11,48 +13,52 @@ import Newsletter from "@components/Newsletter.astro";
 import Footer from "@components/Footer.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-    />
-    <meta
-      name="generator"
-      content={Astro.generator}
-    />
-    <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
-    <!-- Indlæser skrifttypen Cabin og gemmer den som CSS-variablen --font-cabin -->
-    <Font
-      cssVariable="--font-cabin"
-      preload
-    />
-    <!-- Indlæser skrifttypen Lato og gemmer den som CSS-variablen --font-lato -->
-    <Font
-      cssVariable="--font-lato"
-      preload
-    />
-    <!-- Definerer rækkefølgen på dine CSS-layers -->
-    <style is:inline>
-      @layer reset, global, tokens, components, overrides;
-    </style>
-  </head>
-  <body>
-    <Header />
+<head>
+  <ClientRouter />
 
-    <main>
-      <slot />
-    </main>
-    <Newsletter />
-    <Footer />
-  </body>
-</html>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width"
+  />
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg"
+  />
+
+  <meta
+    name="generator"
+    content={Astro.generator}
+  />
+
+  <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
+  <!-- Indlæser skrifttypen Cabin og gemmer den som CSS-variablen --font-cabin -->
+  <Font
+    cssVariable="--font-cabin"
+    preload
+  />
+  <!-- Indlæser skrifttypen Lato og gemmer den som CSS-variablen --font-lato -->
+  <Font
+    cssVariable="--font-lato"
+    preload
+  />
+  <!-- Definerer rækkefølgen på dine CSS-layers -->
+  <style is:inline>
+    @layer reset, global, tokens, components, overrides;
+  </style>
+</head>
+<body>
+  <Header />
+
+  <main>
+    <slot />
+  </main>
+  <Newsletter />
+  <Footer />
+</body>
 
 <style>
   body {

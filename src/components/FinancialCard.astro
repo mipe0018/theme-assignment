@@ -48,13 +48,26 @@ const icon = iconFiles[`../icons/${financial.icon}.svg`];
         gap: 1rem;
 
         /* Luft mellem indhold og kanten */
-        padding: 2rem;
+        padding: 2rem 2rem 0rem 2rem;
 
         /* Grå baggrund */
         background-color: #e5e5e5;
 
         /* Runde hjørner */
         border-radius: 25px;
+    }
+
+    .financial-card h2 {
+        font: var(--heading-sm);
+        padding-bottom: 0.5rem;
+    }
+    .financial-card p {
+        line-height: 1.6;
+        font: var(--body-lg);
+        color: var(--color-text);
+        letter-spacing: 0.5;
+        opacity: 0.9;
+        padding-bottom: 2rem;
     }
 
     .financial-icon img {
