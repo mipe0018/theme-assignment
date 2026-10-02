@@ -94,12 +94,37 @@ import checkmarkIcon from "../icons/checkmark.svg";
             z-index: 0;
             border-radius: 25px;
         }
-
+        /*Typografi*/
+        .info-text h2 {
+            font: var(--body-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+        }
+        .info-text h1 {
+            font-size: 1.8rem;
+            font: var(--heading-lg);
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+        .info-text p {
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
+        }
+        /*Tekst ved siden af ikonerne*/
         .about-text {
             display: flex;
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
         }
 
         .icon {
+            margin: 1rem;
+            width: 2rem;
+            height: 2rem;
             filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
         }
     }
