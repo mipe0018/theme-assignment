@@ -118,11 +118,12 @@ const experienceData: ExperienceData = await fetch(
         /* Indholdet begrænses til maks. 1200px */
         padding-block: 5rem;
         padding-inline: max(2rem, calc((100% - 1200px) / 2));
-        margin-top: 8rem;
+        margin-top: 6rem;
         display: grid;
         grid-template-columns: 1fr 2fr;
         gap: 5rem;
         align-items: center;
+        min-height: 450px;
 
         /* Teksten bliver sort */
         color: black;
@@ -131,19 +132,35 @@ const experienceData: ExperienceData = await fetch(
     /* --- Tekst --- */
 
     .experience-text {
-        max-width: 500px;
+        min-width: 450px;
     }
 
     .experience-text .eyebrow {
         margin: 0;
+        font: var(--body-sm);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 1rem;
+        color: var(--color-text);
     }
 
     .experience-text h1 {
-        margin: 0.5rem 0 1rem;
+        font-size: 2rem;
+        font: var(--heading-lg);
+        letter-spacing: -0.03em;
+        color: var(--color-text);
+        padding: 1rem 0;
+        line-height: 1.5;
     }
 
     .experience-text p {
         margin: 0;
+        line-height: 1.6;
+        font: var(--body-lg);
+        color: var(--color-text);
+        letter-spacing: 0.5;
+        opacity: 0.9;
     }
 
     /* --- Statistikker --- */

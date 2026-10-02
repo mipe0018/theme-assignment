@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-
 import logo from "../assets/images/logo.png";
 ---
 
@@ -15,11 +14,8 @@ import logo from "../assets/images/logo.png";
 
         <div class="menu">
             <a href="/">Home</a>
-
             <a href="/case-studies">Case Studies</a>
-
             <a href="/team">Team</a>
-
             <a href="/about">About</a>
         </div>
 
@@ -61,10 +57,10 @@ import logo from "../assets/images/logo.png";
         ×
     </label>
 
-    <h2>Login</h2>
+    <h2>Dashboard Login</h2>
 
     <form>
-        <label for="login-email"> Email </label>
+        <label for="login-email"> Email Adress</label>
 
         <input
             type="email"
@@ -91,47 +87,40 @@ import logo from "../assets/images/logo.png";
 
     header {
         background-color: var(--color-neutrals-900);
-
         grid-column: a / d;
     }
 
     .header-content {
         max-width: 75rem;
-
         margin-inline: auto;
-
         display: grid;
-
         grid-template-columns: auto 1fr auto;
-
         align-items: center;
-
         padding: 20px;
     }
 
     .menu {
         display: flex;
-
         justify-content: center;
     }
 
     .menu a {
         text-decoration: none;
-
-        color: var(--color-on-ui-primary);
-
-        font-family: var(--font-heading);
-
+        color: var(--color-text-weak);
+        padding: 0.7rem 1.1rem;
+        font: var(--button-sm);
+        letter-spacing: 0.5;
         padding-inline: 2rem;
+    }
+
+    .menu a:hover {
+        color: var(--color-on-ui-primary);
     }
 
     .header-content button {
         background-color: var(--color-on-ui-primary);
-
         font-family: var(--font-heading);
-
-        padding: 4px 16px;
-
+        padding: 8px 20px;
         border-radius: 999px;
     }
 
@@ -141,14 +130,17 @@ import logo from "../assets/images/logo.png";
 
     .login-button {
         background-color: var(--color-on-ui-primary);
-
         font-family: var(--font-heading);
-
-        padding: 4px 16px;
-
         border-radius: 999px;
-
         cursor: pointer;
+        color: var(--color-text);
+        padding: 0.7rem 1.1rem;
+        font: var(--button-sm);
+        letter-spacing: 0.5;
+    }
+
+    .login-button:hover {
+        opacity: 0.8;
     }
 
     /* =========================
@@ -157,13 +149,9 @@ import logo from "../assets/images/logo.png";
 
     .login-toggle {
         position: fixed;
-
         width: 1px;
-
         height: 1px;
-
         opacity: 0;
-
         pointer-events: none;
     }
 
@@ -173,13 +161,9 @@ import logo from "../assets/images/logo.png";
 
     .login-backdrop {
         position: fixed;
-
         inset: 0;
-
         z-index: 9998;
-
         display: none;
-
         cursor: default;
     }
 
@@ -195,33 +179,19 @@ import logo from "../assets/images/logo.png";
 
     .login-popup {
         position: fixed;
-
         top: 85px;
-
         right: max(calc((100vw - 75rem) / 2 + 20px), 20px);
-
-        width: 300px;
-
-        padding: 1.5rem;
-
+        width: 350px;
+        padding: 2rem;
         box-sizing: border-box;
-
         background: white;
-
         border-radius: 18px;
-
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-
         z-index: 9999;
-
         opacity: 0;
-
         visibility: hidden;
-
         pointer-events: none;
-
         transform: translateY(-10px);
-
         transition:
             opacity 0.2s ease,
             transform 0.2s ease,
@@ -234,11 +204,8 @@ import logo from "../assets/images/logo.png";
 
     .login-toggle:checked ~ .login-popup {
         opacity: 1;
-
         visibility: visible;
-
         pointer-events: auto;
-
         transform: translateY(0);
     }
 
@@ -248,17 +215,11 @@ import logo from "../assets/images/logo.png";
 
     .close-login {
         position: absolute;
-
         top: 10px;
-
         right: 15px;
-
         font-size: 1.6rem;
-
         line-height: 1;
-
         color: #777;
-
         cursor: pointer;
     }
 
@@ -272,10 +233,8 @@ import logo from "../assets/images/logo.png";
 
     .login-popup h2 {
         margin: 0 0 1.2rem;
-
-        font-family: var(--font-heading);
-
-        font-size: 1.5rem;
+        font-family: var(--button-lg);
+        font-size: 2rem;
     }
 
     /* =========================
@@ -284,20 +243,16 @@ import logo from "../assets/images/logo.png";
 
     .login-popup form {
         display: flex;
-
         flex-direction: column;
-
         gap: 0.5rem;
     }
 
     .login-popup form label {
         margin-top: 0.4rem;
-
-        font-family: var(--font-heading);
-
-        font-size: 0.85rem;
-
-        font-weight: 600;
+        font-family: var(--button-sm);
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0.5;
     }
 
     /* =========================
@@ -306,22 +261,15 @@ import logo from "../assets/images/logo.png";
 
     .login-popup input {
         width: 100%;
-
         box-sizing: border-box;
-
         padding: 0.75rem;
-
         border: 1px solid #ddd;
-
         border-radius: 9px;
-
-        background: white;
-
+        background: var(--color-surface-secondary);
         color: #222;
-
         font-family: inherit;
-
         font-size: 0.9rem;
+        border-radius: 999px;
     }
 
     .login-popup input:focus {
@@ -336,23 +284,14 @@ import logo from "../assets/images/logo.png";
 
     .login-popup button {
         width: 100%;
-
         margin-top: 1rem;
-
         padding: 0.75rem 1rem;
-
         border: none;
-
         border-radius: 999px;
-
-        background-color: var(--color-blue-700);
-
-        color: white;
-
+        background-color: var(--color-surface-highlight);
+        color: var(--color-text);
         font-family: var(--font-heading);
-
         font-weight: 700;
-
         cursor: pointer;
     }
 

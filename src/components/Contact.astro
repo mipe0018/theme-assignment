@@ -142,18 +142,30 @@ import IconPin from "../icons/pin.svg";
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-width: 500px;
         }
 
         .info-text > h2 {
             margin-bottom: 0.5rem;
+            font: var(--body-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
         }
 
         .info-text > h1 {
-            margin: 0 0 1rem;
+            margin: 0;
+            font-size: 1.8rem;
+            font: var(--heading-lg);
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
         }
 
         .info-text > p {
             margin: 0 0 2rem;
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
         }
 
         /* ========================================
@@ -218,11 +230,19 @@ import IconPin from "../icons/pin.svg";
             display: flex;
             flex-direction: column;
             gap: 0.15rem;
+            margin-left: 0.5rem;
         }
 
-        .icon-text h2,
+        .icon-text h2 {
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
+        }
         .icon-text h3 {
             margin: 0;
+            color: var(--color-text);
+            font: var(--button-lg);
+            letter-spacing: 0.5;
         }
 
         /* ========================================

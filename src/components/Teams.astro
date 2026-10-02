@@ -14,16 +14,16 @@ const TeamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
     <!-- Header med tekst og knap -->
     <div class="teams-header">
         <div class="teams-text">
-            <!-- Lille overskrift -->
-            <p class="eyebrow">OUR TEAM</p>
-
             <!-- Hovedoverskrift -->
-            <h1>Meet Our Team</h1>
+            <h1>Meet Our Great Team</h1>
 
             <!-- Beskrivelse -->
             <p>
-                Meet the people behind our company and the experience they bring
-                to the team.
+                Welcome to our amazing team! We are a group of passionate
+                individuals dedicated to excellence and innovation. Each member
+                brings unique skills and experiences, working together to
+                achieve our goals. Join us as we embark on exciting projects and
+                create lasting impacts.
             </p>
         </div>
 
@@ -64,45 +64,46 @@ const TeamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
         max-width: 650px;
     }
 
-    /* Lille overskrift */
-    .eyebrow {
-        margin-bottom: 0.5rem;
-        font-size: 0.85rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-    }
-
     /* Hovedoverskrift */
     .teams-text h1 {
-        margin: 0 0 1rem;
+        font-size: 1.8rem;
+        font: var(--heading-lg);
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        color: var(--color-text);
     }
 
     /* Beskrivelse */
     .teams-text p:last-child {
         margin: 0;
+        line-height: 1.6;
+        font: var(--body-lg);
+        color: var(--color-text-muted);
     }
 
     /* Join our team knap */
     .join-button {
+        background-color: var(--color-blue-700);
+        color: var(--color-on-surface-elevated);
+        font-family: var(--button-sm);
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0.5;
         flex-shrink: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         padding: 1rem 1.75rem;
-        background-color: var(--color-blue-700);
-        color: white;
         border-radius: 999px;
         text-decoration: none;
         font-weight: 600;
         white-space: nowrap;
-        transition:;
-        transform 0.2s ease,
-        opacity 0.2s ease;
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
     }
 
     .join-button:hover {
-        transform: translateY(-2px);
         opacity: 0.85;
     }
 

@@ -57,15 +57,26 @@
         .newsletter-inner h2 {
             font-size: 0.9rem;
             color: var(--color-surface-highlight);
+            font: var(--body-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.5rem;
         }
 
         /* Hovedoverskrift */
         .newsletter-inner h1 {
             color: var(--color-on-ui-primary);
+            font-size: 1.8rem;
+            font: var(--heading-lg);
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
         }
 
         /* Teksten under overskriften */
         .newsletter-inner p {
+            line-height: 1.6;
+            font: var(--body-lg);
             color: var(--color-text-muted);
         }
 
@@ -78,15 +89,14 @@
         .newsletter-form {
             display: flex;
             gap: 0.75rem;
-            margin-top: 1.5rem;
         }
 
         /* Emailfeltet er dobbelt så bredt som knappen */
         input {
-            width: 200px;
+            width: 300px;
             background-color: var(--color-neutrals-900);
             font-family: var(--font-heading);
-            padding: 4px 16px;
+            padding: 20px 16px;
             border: none;
             border-radius: 999px;
             font-size: 1rem;
@@ -98,23 +108,16 @@
         button {
             background-color: var(--color-action);
             font-family: var(--font-heading);
-            padding: 4px 16px;
+            padding: 20px 40px;
+            color: var(--color-text);
+            font: var(--button-sm);
+            letter-spacing: 0.5;
             border: none;
             border-radius: 999px;
             font-size: 1rem;
             transition:
                 transform 0.2s ease,
                 box-shadow 0.2s ease;
-        }
-
-        button {
-            background-color: var(--color-surface-highlight);
-            font-family: var(--font-heading);
-            padding: 4px 16px;
-            border: none;
-            border-radius: 999px;
-            font-size: 1rem;
-            transition: background-color 0.15s ease;
         }
 
         button:hover {
