@@ -6,7 +6,21 @@ import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import ArrowLeft from "@icons/arrow-left.svg";
 
+/* ========================================
+   IKONER
+======================================== */
+
+const iconFiles = import.meta.glob("../../icons/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const instagramIcon = iconFiles["../../icons/instagram.svg"];
+const facebookIcon = iconFiles["../../icons/facebook.svg"];
+
 export async function getStaticPaths() {
+  0;
   // Henter alle teammedlemmer fra API'et
   const team = await getTeamMembers();
 
@@ -41,6 +55,7 @@ const { employee }: { employee: any } = Astro.props;
     <section class="team-detail">
       <!-- Billede -->
       <div class="team-image">
+        <div class="green-box"></div>
         <Image
           src={employee.image.src}
           alt={employee.image.alt}
@@ -48,6 +63,25 @@ const { employee }: { employee: any } = Astro.props;
           height={employee.image.height}
           transition:name={`team-image-${employee.slug}`}
         />
+        <div class="social-icons">
+          {
+            instagramIcon && (
+              <img
+                src={instagramIcon}
+                alt="Instagram"
+              />
+            )
+          }
+
+          {
+            facebookIcon && (
+              <img
+                src={facebookIcon}
+                alt="Facebook"
+              />
+            )
+          }
+        </div>
       </div>
 
       <!-- Information -->
@@ -192,8 +226,9 @@ const { employee }: { employee: any } = Astro.props;
   .team-image {
     width: 80%;
     height: 80%;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 30px;
+    position: relative;
   }
 
   /* Selve billedet */
@@ -208,6 +243,42 @@ const { employee }: { employee: any } = Astro.props;
   /* Lille zoom når man holder musen over */
   .team-image:hover img {
     transform: scale(1.03);
+  }
+
+  .green-box {
+    position: absolute;
+    width: 15rem;
+    height: 10rem;
+    top: -2rem;
+    left: -2rem;
+    background-color: var(--color-green-400);
+    z-index: 0;
+    border-radius: 25px;
+  }
+
+  /* ========================================
+   SOCIAL ICONS
+======================================== */
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .social-icons img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+    opacity: 0.8;
+    margin-top: 2rem;
+  }
+
+  .social-icons img:hover {
+    transform: scale(1.1);
   }
 
   /* -------------------- */
