@@ -317,7 +317,150 @@ const { variant = "default" } = Astro.props;
     .mobile-values {
         display: none;
     }
+    /* =========================================
+   Responsive
+========================================= */
 
+    /* =========================================
+   TABLET
+========================================= */
+
+    @media (max-width: 900px) {
+        /* Content */
+        .values-wrapper {
+            width: calc(100% - 6rem);
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .values-header {
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .values-text {
+            max-width: 100%;
+        }
+
+        /* Titel */
+        .values-text h2 {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Undertitel */
+        .subtitle {
+            max-width: 100%;
+        }
+
+        /* Get in touch */
+        .values-button {
+            transform: none;
+            flex-shrink: 0;
+        }
+
+        /* Cards */
+        .values-cards {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 0;
+        }
+    }
+
+    /* =========================================
+   MOBIL
+========================================= */
+
+    @media (max-width: 768px) {
+        .values-section {
+            display: block;
+            padding: 3.5rem 0;
+        }
+
+        .values-wrapper {
+            width: calc(100% - 3rem);
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .values-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .values-text {
+            width: 100%;
+            max-width: none;
+        }
+
+        .eyebrow {
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .values-text h2 {
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            width: 100%;
+            max-width: none;
+        }
+
+        /* Get in touch */
+        .values-button {
+            transform: none;
+            align-self: flex-start;
+        }
+
+        /* Desktop cards skjules */
+        .desktop-values-cards {
+            display: none;
+        }
+
+        /* Mobil selected card */
+        .mobile-values {
+            display: block;
+        }
+
+        .mobile-selected-card {
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        /* =========================================
+       VÆRDI-KNAPPER
+    ========================================= */
+
+        .mobile-value-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(2, auto);
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .mobile-value-buttons button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 999px;
+            background-color: var(--color-neutrals-200);
+            color: var(--color-text);
+            font: var(--button-sm);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .mobile-value-buttons button.active {
+            background-color: var(--color-blue-700);
+            color: white;
+        }
+    }
     /* =========================================
        MOBIL
     ========================================= */

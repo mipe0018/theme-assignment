@@ -286,14 +286,59 @@ const { employee }: { employee: any } = Astro.props;
   /* -------------------- */
 
   @media (max-width: 900px) {
+    .team-page {
+      padding: 2rem 3rem 5rem;
+    }
+
     .team-detail {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
 
     .team-image {
-      min-height: 500px;
       order: -1;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 1 / 1;
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-info {
+      padding: 0;
+    }
+
+    .intro {
+      min-width: 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-section p {
+      min-width: 0;
+    }
+
+    .green-box {
+      width: 10rem;
+      height: 7rem;
+      top: -1rem;
+      left: -1rem;
+      border-radius: 20px;
+    }
+
+    .social-icons {
+      gap: 1rem;
+      padding: 0.75rem 0;
+    }
+
+    .social-icons img {
+      width: 3rem;
+      height: 3rem;
+      margin-top: 1rem;
     }
   }
 
@@ -303,28 +348,92 @@ const { employee }: { employee: any } = Astro.props;
 
   @media (max-width: 600px) {
     .team-page {
+      width: 100%;
+      box-sizing: border-box;
       padding: 1.5rem 1.25rem 4rem;
     }
 
     .back-link {
+      margin-top: 1rem;
       margin-bottom: 2rem;
     }
 
     .team-detail {
-      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
     .team-image {
-      min-height: 400px;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 1 / 1;
       border-radius: 20px;
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .green-box {
+      width: 7rem;
+      height: 5rem;
+      top: -0.75rem;
+      left: -0.75rem;
+      border-radius: 18px;
+    }
+
+    .team-info {
+      width: 100%;
+      padding: 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
     }
 
     .team-info h1 {
       font-size: 2.7rem;
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
     }
 
     .intro {
-      font-size: 1.05rem;
+      min-width: 0;
+      width: 100%;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .info-section {
+      margin-top: 2rem;
+    }
+
+    .info-section h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .info-section p {
+      min-width: 0;
+      width: 100%;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .social-icons {
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .social-icons img {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-top: 0.5rem;
     }
   }
 </style>

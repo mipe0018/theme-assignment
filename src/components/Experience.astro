@@ -260,6 +260,55 @@ const experienceData: ExperienceData = await fetch(
         margin-block-start: 0.75rem;
         color: black;
     }
+    /* ========================================
+   TABLET
+======================================== */
+
+    @media (max-width: 900px) {
+        .experience {
+            margin-top: 4rem;
+            padding-block: 4rem;
+            padding-inline: 3rem;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            min-height: auto;
+        }
+
+        /* Tekst */
+        .experience-text {
+            min-width: 0;
+        }
+
+        .experience-text h1 {
+            padding: 0.75rem 0;
+            line-height: 1.2;
+        }
+
+        .experience-text p {
+            line-height: 1.6;
+        }
+
+        /* Statistikker */
+        .stat-list {
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        figure {
+            max-width: 140px;
+            min-width: 0;
+        }
+
+        .stat-number {
+            font-size: 30cqw;
+        }
+
+        figcaption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
 
     /* =========================
        MOBILE

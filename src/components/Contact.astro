@@ -324,6 +324,107 @@ import IconPin from "../icons/pin.svg";
             object-fit: cover;
             border-radius: 25px;
         }
+        /* ========================================
+   TABLET
+======================================== */
+
+        @media (max-width: 900px) {
+            /* Sektionen */
+            .contact-info {
+                margin-top: 8rem;
+            }
+
+            /* Mere luft i siderne */
+            .contact-info-inner {
+                width: calc(100% - 6rem);
+                margin-inline: auto;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 220px 220px;
+                gap: 1rem;
+            }
+
+            /* Tekst */
+            .info-text {
+                min-width: 0;
+            }
+
+            .info-text > h2 {
+                margin-bottom: 0.5rem;
+            }
+
+            .info-text > h1 {
+                margin-bottom: 0.75rem;
+            }
+
+            .info-text > p {
+                margin-bottom: 1.5rem;
+            }
+
+            /* Kontaktoplysninger */
+            .info-icon {
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .icon-circle {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+            }
+
+            .contact-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .icon-text {
+                margin-left: 0;
+                min-width: 0;
+            }
+
+            .icon-text h2 {
+                font-size: 0.9rem;
+            }
+
+            .icon-text h3 {
+                font-size: 1rem;
+            }
+
+            /* Stort billede */
+            .ContactImgLarge {
+                width: 100%;
+                height: 100%;
+            }
+
+            .ContactImgLarge .contact-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Grøn boks */
+            .green-box {
+                width: 8rem;
+                height: 5rem;
+                left: -0.5rem;
+                bottom: -0.5rem;
+                border-radius: 20px;
+            }
+
+            /* Små billeder */
+            .ContactImgSmallTop,
+            .ContactImgSmallBottom {
+                width: 100%;
+                height: 100%;
+            }
+
+            .ContactImgSmallTop .contact-img,
+            .ContactImgSmallBottom .contact-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
 
         /* ========================================
            MOBIL
