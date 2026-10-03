@@ -22,7 +22,6 @@
             <button>Subscribe</button>
         </div>
     </div>
-    ```
 </section>
 
 <style>
@@ -123,5 +122,61 @@
         button:hover {
             opacity: 0.8;
         }
+/* =========================
+       MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+    .newsletter {
+        margin-top: 4rem;
+        margin-bottom: -2rem;
     }
+
+    .newsletter-inner {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2.5rem 1.5rem 3.5rem;
+    }
+
+    .newsletter-inner h2 {
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .newsletter-inner h1 {
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+    }
+
+    .newsletter-inner p {
+        max-width: 20rem;
+        margin-inline: auto;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 300px;
+        margin-top: 1.25rem;
+        gap: 0.6rem;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px 18px;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        padding: 15px 18px;
+    }
+}
+
+
 </style>

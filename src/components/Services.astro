@@ -1,22 +1,221 @@
 ---
-//@ts-nocheck
-import ServiceCard from "@components/ServiceCard.astro";
-
 const serviceData = await fetch("https://ftk-api.pages.dev/services").then(
   (res) => res.json(),
 );
+
+import ArrowRight from "@icons/arrow--right.svg";
+import ServiceCard from "@components/ServiceCard.astro";
+
+const service1 = serviceData[0];
+const service2 = serviceData[1];
+const service3 = serviceData[2];
 ---
 
-<div class="services">
-  {serviceData.map((service) => <ServiceCard service={service} />)}
+<!-- Desktop -->
+<div class="services desktop-services">
+  <ServiceCard service={service1} />
+
+  <ServiceCard service={service2} />
+
+  <ServiceCard service={service3} />
+</div>
+
+<!-- Mobile -->
+<div class="mobile-services">
+  <details class="mobile-service">
+    <summary>
+      <span>{service1.title}</span>
+      <ArrowRight stroke-width={2.5} />
+    </summary>
+
+    <div class="service-panel">
+      <h2>{service1.title}</h2>
+
+      <p>{service1.description}</p>
+
+      <a href="#0">
+        {service1.buttonText}
+        <ArrowRight stroke-width={2.5} />
+      </a>
+    </div>
+  </details>
+
+  <details class="mobile-service">
+    <summary>
+      <span>{service2.title}</span>
+      <ArrowRight stroke-width={2.5} />
+    </summary>
+
+    <div class="service-panel">
+      <h2>{service2.title}</h2>
+
+      <p>{service2.description}</p>
+
+      <a href="#0">
+        {service2.buttonText}
+        <ArrowRight stroke-width={2.5} />
+      </a>
+    </div>
+  </details>
+
+  <details class="mobile-service">
+    <summary>
+      <span>{service3.title}</span>
+      <ArrowRight stroke-width={2.5} />
+    </summary>
+
+    <div class="service-panel">
+      <h2>{service3.title}</h2>
+
+      <p>{service3.description}</p>
+
+      <a href="#0">
+        {service3.buttonText}
+        <ArrowRight stroke-width={2.5} />
+      </a>
+    </div>
+  </details>
 </div>
 
 <style>
   @layer components {
-    .services {
+    /* =========================
+           DESKTOP
+        ========================== */
+
+    .desktop-services {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+    }
+
+    .mobile-services {
+      display: none;
+    }
+
+    /* =========================
+           MOBILE
+        ========================== */
+
+    @media (max-width: 768px) {
+      .desktop-services {
+        display: none;
+      }
+
+      .mobile-services {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        max-width: 400px;
+        margin-inline: auto;
+      }
+
+      .mobile-service {
+        width: 100%;
+      }
+
+      /* =========================
+               SERVICE TITLE + ARROW
+            ========================== */
+
+      .mobile-service summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--color-text-muted);
+        color: var(--color-on-ui-primary);
+        font: var(--button-lg);
+        cursor: pointer;
+        list-style: none;
+      }
+
+      .mobile-service summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .mobile-service summary::marker {
+        display: none;
+        content: "";
+      }
+
+      .mobile-service summary svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+
+      /* =========================
+               PIL NÅR ÅBEN
+            ========================== */
+
+      .mobile-service[open] summary svg {
+        transform: rotate(90deg);
+      }
+
+      /* =========================
+               SERVICE PANEL
+            ========================== */
+
+      .service-panel {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1.5rem;
+        background: var(--color-blue-700-transparent);
+        color: var(--color-on-surface-elevated);
+        border-radius: 20px;
+        animation: service-slide-in 0.35s ease;
+      }
+
+      .service-panel h2 {
+        font: var(--heading-sm);
+        margin-bottom: 0.75rem;
+      }
+
+      .service-panel p {
+        font: var(--body-sm);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        color: var(--color-on-surface-elevated);
+      }
+
+      .service-panel a {
+        display: inline-flex;
+        align-items: center;
+        gap: 1ch;
+        color: var(--color-action);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .service-panel a svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .service-panel a:hover {
+        text-decoration: underline;
+      }
+
+      /* =========================
+               SLIDE IND FRA VENSTRE
+            ========================== */
+
+      @keyframes service-slide-in {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
     }
   }
 </style>

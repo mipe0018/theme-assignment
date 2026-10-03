@@ -261,15 +261,62 @@ const experienceData: ExperienceData = await fetch(
         color: black;
     }
 
-    /* --- Mobil --- */
-
-    @media (max-width: 800px) {
+    /* =========================
+       MOBILE
+========================== */
+    @media (max-width: 768px) {
         .experience {
+            display: grid;
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 2.5rem;
+            min-height: auto;
+            margin-top: 4rem;
+            padding: 3.5rem 1.5rem;
+        }
 
-            /* Mindre afstand til kanten på mobil */
-            padding-inline: 1.5rem;
+        .experience-text {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .experience-text .eyebrow {
+            font-size: 0.85rem;
+        }
+
+        .experience-text h1 {
+            padding: 0.75rem 0;
+            line-height: 1.2;
+        }
+
+        .experience-text p {
+            line-height: 1.6;
+        }
+
+        /* Statistikker på én række */
+
+        .stat-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        figure {
+            flex: 1;
+            max-width: 100px;
+            min-width: 0;
+            margin: 0 auto;
+        }
+
+        .stat-number {
+            font-size: 30cqw;
+        }
+
+        figcaption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
         }
     }
 </style>
