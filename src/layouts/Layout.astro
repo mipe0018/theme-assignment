@@ -59,25 +59,32 @@ import Footer from "@components/Footer.astro";
   <Newsletter />
   <Footer />
 </body>
-
 <style>
   body {
     display: grid;
-
     grid-template-columns:
       [a] 1fr
-      [b] minmax(0, 1200px)
+      [b] minmax(0, 75rem)
       [c] 1fr
       [d];
-
     grid-template-rows: auto 1fr auto;
-
     min-height: 100svh;
-
     margin: 0;
   }
 
   main {
     grid-column: a / d;
+    min-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      display: block;
+    }
+
+    main {
+      grid-column: a / d;
+      min-width: 0;
+    }
   }
 </style>

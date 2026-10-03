@@ -50,15 +50,16 @@ import checkmarkIcon from "../icons/checkmark.svg";
         </div>
     </div>
 </section>
-
 <style>
     @layer components {
-        /* Sectionen går i fuld bredde */
+        /* ========================================
+           DESKTOP
+        ======================================== */
+
         .info {
             width: 100%;
         }
 
-        /* Indholdet holdes i 1200px */
         .info-inner {
             width: min(75rem, 100%);
             margin-inline: auto;
@@ -68,7 +69,8 @@ import checkmarkIcon from "../icons/checkmark.svg";
             align-items: center;
         }
 
-        /* Plads til den grønne boks */
+        /* BILLEDE */
+
         .about-image {
             position: relative;
             padding: 1.25rem;
@@ -83,7 +85,8 @@ import checkmarkIcon from "../icons/checkmark.svg";
             border-radius: 25px;
         }
 
-        /* Grøn boks bag billedet */
+        /* GRØN BOKS */
+
         .green-box {
             position: absolute;
             width: 10rem;
@@ -95,12 +98,155 @@ import checkmarkIcon from "../icons/checkmark.svg";
             border-radius: 25px;
         }
 
+        /* TYPOGRAFI */
+
+        .info-text h2 {
+            font: var(--body-sm);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+        }
+
+        .info-text h1 {
+            font: var(--heading-lg);
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .info-text p {
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        /* CHECKMARK TEKST */
+
         .about-text {
             display: flex;
+            line-height: 1.6;
+            font: var(--body-lg);
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            display: flex;
+            align-items: flex-start;
         }
 
         .icon {
+            flex-shrink: 0;
+            margin: 0.5rem 0.75rem 0 0;
+            width: 2rem;
+            height: 2rem;
             filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
+        }
+
+        /* ========================================
+   TABLET / MINDRE DESKTOP
+======================================== */
+
+        @media (min-width: 901px) and (max-width: 1200px) {
+            .info-inner {
+                width: calc(100% - 4rem);
+                margin-inline: auto;
+                gap: 3rem;
+            }
+
+            .about-image {
+                padding: 1rem;
+            }
+
+            .info-text {
+                min-width: 0;
+            }
+        }
+        /* ========================================
+           MOBIL
+        ======================================== */
+
+        @media (max-width: 768px) {
+            .info {
+                margin-top: 1rem;
+            }
+
+            .info-inner {
+                width: 100%;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                padding: 0 1.5rem;
+            }
+
+            /* TEKST */
+
+            .info-text {
+                width: 100%;
+            }
+
+            .info-text h2 {
+                margin-bottom: 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .info-text h1 {
+                margin-bottom: 0.75rem;
+                line-height: 1.2;
+            }
+
+            .info-text > p {
+                margin-bottom: 1.5rem;
+            }
+
+            /* CHECKMARK TEKST */
+
+            .about-text {
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .about-text p {
+                display: flex;
+                align-items: flex-start;
+                margin: 0;
+            }
+
+            .icon {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 1.5rem;
+                margin: 0.25rem 0.75rem 0 0;
+            }
+
+            /* BILLEDE */
+
+            .about-image {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0.75rem;
+            }
+
+            .about-img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 20px;
+            }
+
+            /* GRØN BOKS */
+
+            .green-box {
+                width: 6rem;
+                height: 6rem;
+                top: -0.25rem;
+                right: -0.25rem;
+                border-radius: 20px;
+            }
         }
     }
 </style>

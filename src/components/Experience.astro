@@ -63,49 +63,60 @@ const experienceData: ExperienceData = await fetch(
 </section>
 
 <script>
-    const statFigures = document.querySelectorAll(".stat-list figure");
+    function startStatAnimation() {
+        const statFigures = document.querySelectorAll(".stat-list figure");
 
-    // Starter animationen, når cirklen bliver synlig på skærmen
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
 
-                const figure = entry.target;
-                const target = Number(figure.getAttribute("data-target"));
+                    const figure = entry.target;
+                    const target = Number(figure.getAttribute("data-target"));
+                    const number = figure.querySelector(".stat-number");
 
-                const number = figure.querySelector(".stat-number");
-                let value = 0;
+                    let value = 0;
 
-                // Tæller procenten op fra 0 til værdien fra API'et
-                const interval = setInterval(() => {
-                    value++;
-
-                    // Opdaterer værdien, som CSS bruger til cirklen
-                    figure.setAttribute("data-value", value.toString());
+                    // Sørger for at animationen altid starter fra 0
+                    figure.setAttribute("data-value", "0");
 
                     if (number) {
-                        number.textContent = value + "%";
+                        number.textContent = "0%";
                     }
 
-                    if (value >= target) {
-                        clearInterval(interval);
-                    }
-                }, 20);
+                    const interval = setInterval(() => {
+                        value++;
 
-                // Animationen kører kun én gang
-                observer.unobserve(figure);
-            });
-        },
-        {
-            // Animationen starter, når 40% er synligt
-            threshold: 0.4,
-        },
-    );
+                        figure.setAttribute("data-value", value.toString());
 
-    statFigures.forEach((figure) => {
-        observer.observe(figure);
-    });
+                        if (number) {
+                            number.textContent = value + "%";
+                        }
+
+                        if (value >= target) {
+                            clearInterval(interval);
+                        }
+                    }, 20);
+
+                    // Animationen kører kun én gang pr. besøg på siden
+                    observer.unobserve(figure);
+                });
+            },
+            {
+                threshold: 0.4,
+            },
+        );
+
+        statFigures.forEach((figure) => {
+            observer.observe(figure);
+        });
+    }
+
+    // Kører første gang siden indlæses
+    startStatAnimation();
+
+    // Kører igen når Astro navigerer tilbage til siden
+    document.addEventListener("astro:page-load", startStatAnimation);
 </script>
 
 <style>
@@ -249,16 +260,112 @@ const experienceData: ExperienceData = await fetch(
         margin-block-start: 0.75rem;
         color: black;
     }
+    /* ========================================
+   TABLET
+======================================== */
 
-    /* --- Mobil --- */
-
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
         .experience {
-            grid-template-columns: 1fr;
+            margin-top: 4rem;
+            padding-block: 4rem;
+            padding-inline: 3rem;
+            grid-template-columns: 1fr 1.5fr;
             gap: 3rem;
+            min-height: auto;
+        }
 
-            /* Mindre afstand til kanten på mobil */
-            padding-inline: 1.5rem;
+        /* Tekst */
+        .experience-text {
+            min-width: 0;
+        }
+
+        .experience-text h1 {
+            padding: 0.75rem 0;
+            line-height: 1.2;
+        }
+
+        .experience-text p {
+            line-height: 1.6;
+        }
+
+        /* Statistikker */
+        .stat-list {
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        figure {
+            max-width: 140px;
+            min-width: 0;
+        }
+
+        .stat-number {
+            font-size: 30cqw;
+        }
+
+        figcaption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* =========================
+       MOBILE
+========================== */
+    @media (max-width: 768px) {
+        .experience {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            min-height: auto;
+            margin-top: 4rem;
+            padding: 3.5rem 1.5rem;
+        }
+
+        .experience-text {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .experience-text .eyebrow {
+            font-size: 0.85rem;
+        }
+
+        .experience-text h1 {
+            padding: 0.75rem 0;
+            line-height: 1.2;
+        }
+
+        .experience-text p {
+            line-height: 1.6;
+        }
+
+        /* Statistikker på én række */
+
+        .stat-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        figure {
+            flex: 1;
+            max-width: 100px;
+            min-width: 0;
+            margin: 0 auto;
+        }
+
+        .stat-number {
+            font-size: 30cqw;
+        }
+
+        figcaption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
         }
     }
 </style>

@@ -52,7 +52,6 @@ import checkmarkIcon from "../icons/checkmark.svg";
     </div>
   </div>
 </section>
-
 <style>
   @layer components {
     /* Sectionen går i fuld bredde */
@@ -100,6 +99,7 @@ import checkmarkIcon from "../icons/checkmark.svg";
 
     .info-text {
       display: flex;
+      align-items: center;
       flex-direction: column;
       gap: 0.75rem;
     }
@@ -111,7 +111,6 @@ import checkmarkIcon from "../icons/checkmark.svg";
     }
 
     .info-text h2 {
-      /*uppercase overskrift*/
       font-size: 1rem;
       color: var(--color-blue-700, #2563eb);
       font: var(--body-sm);
@@ -122,7 +121,6 @@ import checkmarkIcon from "../icons/checkmark.svg";
     }
 
     .info-text h1 {
-      /*overskrift*/
       font-size: 1.8rem;
       font: var(--heading-lg);
       letter-spacing: -0.03em;
@@ -130,16 +128,10 @@ import checkmarkIcon from "../icons/checkmark.svg";
     }
 
     .info-text p {
-      /*almindelig p tekst*/
       line-height: 1.6;
       font: var(--body-lg);
       color: var(--color-text-muted);
-    }
-    .about-text p {
-      padding: 0.5rem;
       display: flex;
-      font: var(--body-lg);
-      color: var(--color-text-muted);
     }
 
     .icon {
@@ -147,6 +139,137 @@ import checkmarkIcon from "../icons/checkmark.svg";
       width: 2rem;
       height: 2rem;
       filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
+    }
+
+    /* ========================================
+       Responsive
+    ========================================= */
+    /* ========================================
+   Tablet
+======================================== */
+
+    @media (max-width: 900px) {
+      .info {
+        margin-top: 4rem;
+      }
+
+      .info-inner {
+        width: calc(100% - 6rem);
+        margin-inline: auto;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+
+      .info-image {
+        padding: 1rem;
+      }
+
+      .green-box {
+        width: 7.5rem;
+        height: 7.5rem;
+        top: -0.25rem;
+        left: -0.25rem;
+      }
+
+      .info-text {
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .info-text h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      .info-text h1 {
+        margin-bottom: 0.75rem;
+      }
+
+      .info-text > p {
+        margin-bottom: 1rem;
+      }
+
+      .about-text {
+        width: 100%;
+      }
+
+      .info-text .about-text p {
+        align-items: flex-start;
+      }
+
+      .icon {
+        flex-shrink: 0;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin: 0.5rem 0.75rem 0 0;
+      }
+    }
+    /* ========================================
+       Mobil
+    ========================================= */
+
+    @media (max-width: 768px) {
+      .info {
+        margin-top: 4rem;
+      }
+
+      .info-inner {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        padding: 0 1.5rem;
+      }
+
+      .info-image {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.75rem;
+      }
+
+      .info-img {
+        width: 100%;
+      }
+
+      .green-box {
+        width: 6rem;
+        height: 6rem;
+        top: -0.25rem;
+        left: -0.25rem;
+      }
+
+      .info-text {
+        width: 100%;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .info-text h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      .info-text h1 {
+        margin-bottom: 0.75rem;
+      }
+
+      .info-text > p {
+        margin-bottom: 1rem;
+      }
+
+      .about-text {
+        width: 100%;
+      }
+
+      .info-text .about-text p {
+        align-items: flex-start;
+      }
+
+      .icon {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0.25rem 0.75rem 0 0;
+      }
     }
   }
 </style>

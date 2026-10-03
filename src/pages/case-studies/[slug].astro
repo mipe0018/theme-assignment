@@ -283,7 +283,7 @@ const sections = caseStudy.sections ?? [];
     flex-shrink: 0;
     padding: 0.65rem 1rem;
     border-radius: 999px;
-    background: white;
+    background: var(--color-surface-highlight);
     color: var(--color-blue-700, #2563eb);
     text-decoration: none;
     /* Lato - bold */
@@ -324,7 +324,6 @@ const sections = caseStudy.sections ?? [];
 
   .case-section h2 {
     width: min(900px, 100%);
-
     margin-left: auto;
     margin-right: auto;
     /*typografi*/
@@ -429,7 +428,7 @@ const sections = caseStudy.sections ?? [];
     display: block;
 
     /* Gør billedet mørkere og mindre lyst */
-    filter: brightness(0.7);
+    filter: brightness(0.9);
   }
 
   /* Blød sort fade fra bunden af billedet */
@@ -468,7 +467,6 @@ const sections = caseStudy.sections ?? [];
   /* =========================================
      MOBILE
   ========================================= */
-
   @media (max-width: 700px) {
     .case-study-page {
       grid-template-columns: 16px minmax(0, 1fr) 16px;
@@ -476,7 +474,30 @@ const sections = caseStudy.sections ?? [];
 
     .case-heading {
       grid-column: 2;
-      margin-top: 3rem;
+      margin: 2.5rem auto 2rem;
+      text-align: center;
+    }
+
+    .case-heading .eyebrow {
+      margin-bottom: 0.5rem;
+      font: var(--body-sm);
+      font-weight: 600;
+    }
+
+    .case-heading h1 {
+      margin: 0 0 0.75rem;
+      font: var(--heading-xl);
+      font-size: 2.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .case-heading .intro {
+      max-width: 450px;
+      margin: 0 auto;
+      font: var(--body-lg);
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .case-hero {
@@ -515,6 +536,14 @@ const sections = caseStudy.sections ?? [];
 
     .case-section {
       margin-bottom: 4rem;
+    }
+
+    /* Tekst oven på billeder */
+
+    .case-image figcaption {
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      line-height: 1.4;
     }
 
     .case-section h2,

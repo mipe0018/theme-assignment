@@ -4,8 +4,23 @@
 import { getTeamMembers } from "@lib/api";
 import { Image } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
+import ArrowLeft from "@icons/arrow-left.svg";
+
+/* ========================================
+   IKONER
+======================================== */
+
+const iconFiles = import.meta.glob("../../icons/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const instagramIcon = iconFiles["../../icons/instagram.svg"];
+const facebookIcon = iconFiles["../../icons/facebook.svg"];
 
 export async function getStaticPaths() {
+  0;
   // Henter alle teammedlemmer fra API'et
   const team = await getTeamMembers();
 
@@ -28,17 +43,19 @@ const { employee }: { employee: any } = Astro.props;
 <Layout>
   <main class="team-page">
     <!-- Tilbage til team-siden -->
+
     <a
       href="/team"
       class="back-link"
     >
-      ← Back to team
+      <ArrowLeft class="arrow" /> Back to team
     </a>
 
     <!-- Hovedindhold -->
     <section class="team-detail">
       <!-- Billede -->
       <div class="team-image">
+        <div class="green-box"></div>
         <Image
           src={employee.image.src}
           alt={employee.image.alt}
@@ -46,6 +63,25 @@ const { employee }: { employee: any } = Astro.props;
           height={employee.image.height}
           transition:name={`team-image-${employee.slug}`}
         />
+        <div class="social-icons">
+          {
+            instagramIcon && (
+              <img
+                src={instagramIcon}
+                alt="Instagram"
+              />
+            )
+          }
+
+          {
+            facebookIcon && (
+              <img
+                src={facebookIcon}
+                alt="Facebook"
+              />
+            )
+          }
+        </div>
       </div>
 
       <!-- Information -->
@@ -93,19 +129,28 @@ const { employee }: { employee: any } = Astro.props;
   /* Hele siden */
   .team-page {
     width: 100%;
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
     padding: 2rem 2rem 5rem;
   }
 
   /* Tilbage-link */
+
   .back-link {
-    display: inline-block;
-    margin-bottom: 3rem;
+    display: flex;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--color-blue-700);
     text-decoration: none;
     font-weight: 600;
     transition: transform 0.2s ease;
+    gap: 1rem;
+    line-height: 1;
+  }
+
+  .arrow {
+    width: 1rem;
+    height: 1rem;
   }
 
   .back-link:hover {
@@ -116,7 +161,7 @@ const { employee }: { employee: any } = Astro.props;
   .team-detail {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    gap: 2rem;
     align-items: center;
   }
 
@@ -140,14 +185,20 @@ const { employee }: { employee: any } = Astro.props;
     margin: 0 0 1.5rem;
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1;
+    font-size: 1.8rem;
+    font: var(--heading-lg);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   /* Kort beskrivelse */
   .intro {
-    max-width: 550px;
+    min-width: 600px;
     margin: 0 0 3rem;
-    font-size: 1.2rem;
-    line-height: 1.7;
+    line-height: 1.6;
+    font: var(--body-lg);
+    color: var(--color-text-muted);
   }
 
   /* Sektioner */
@@ -157,21 +208,27 @@ const { employee }: { employee: any } = Astro.props;
 
   .info-section h2 {
     margin-bottom: 0.75rem;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
+    font: var(--heading-lg);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   .info-section p {
-    max-width: 550px;
-    line-height: 1.7;
+    min-width: 550px;
+    line-height: 1.6;
+    font: var(--body-lg);
+    color: var(--color-text-muted);
   }
 
   /* Højre side */
   .team-image {
-    width: 100%;
-    height: 100%;
-    min-height: 600px;
-    overflow: hidden;
+    width: 80%;
+    height: 80%;
+    overflow: visible;
     border-radius: 30px;
+    position: relative;
   }
 
   /* Selve billedet */
@@ -188,19 +245,100 @@ const { employee }: { employee: any } = Astro.props;
     transform: scale(1.03);
   }
 
+  .green-box {
+    position: absolute;
+    width: 15rem;
+    height: 10rem;
+    top: -2rem;
+    left: -2rem;
+    background-color: var(--color-green-400);
+    z-index: 0;
+    border-radius: 25px;
+  }
+
+  /* ========================================
+   SOCIAL ICONS
+======================================== */
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .social-icons img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+    opacity: 0.8;
+    margin-top: 2rem;
+  }
+
+  .social-icons img:hover {
+    transform: scale(1.1);
+  }
+
   /* -------------------- */
   /* TABLET */
   /* -------------------- */
 
   @media (max-width: 900px) {
+    .team-page {
+      padding: 2rem 3rem 5rem;
+    }
+
     .team-detail {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
 
     .team-image {
-      min-height: 500px;
       order: -1;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 1 / 1;
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-info {
+      padding: 0;
+    }
+
+    .intro {
+      min-width: 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-section p {
+      min-width: 0;
+    }
+
+    .green-box {
+      width: 10rem;
+      height: 7rem;
+      top: -1rem;
+      left: -1rem;
+      border-radius: 20px;
+    }
+
+    .social-icons {
+      gap: 1rem;
+      padding: 0.75rem 0;
+    }
+
+    .social-icons img {
+      width: 3rem;
+      height: 3rem;
+      margin-top: 1rem;
     }
   }
 
@@ -210,28 +348,92 @@ const { employee }: { employee: any } = Astro.props;
 
   @media (max-width: 600px) {
     .team-page {
+      width: 100%;
+      box-sizing: border-box;
       padding: 1.5rem 1.25rem 4rem;
     }
 
     .back-link {
+      margin-top: 1rem;
       margin-bottom: 2rem;
     }
 
     .team-detail {
-      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
     .team-image {
-      min-height: 400px;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 1 / 1;
       border-radius: 20px;
+    }
+
+    .team-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .green-box {
+      width: 7rem;
+      height: 5rem;
+      top: -0.75rem;
+      left: -0.75rem;
+      border-radius: 18px;
+    }
+
+    .team-info {
+      width: 100%;
+      padding: 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
     }
 
     .team-info h1 {
       font-size: 2.7rem;
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
     }
 
     .intro {
-      font-size: 1.05rem;
+      min-width: 0;
+      width: 100%;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .info-section {
+      margin-top: 2rem;
+    }
+
+    .info-section h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    .info-section p {
+      min-width: 0;
+      width: 100%;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .social-icons {
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .social-icons img {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-top: 0.5rem;
     }
   }
 </style>

@@ -1,7 +1,9 @@
 ---
 /* @ts-nocheck bruges til at undgå TypeScript-fejl */
+
 import ArrowRight from "@icons/arrow--right.svg";
 import ArrowLeft from "@icons/arrow-left.svg";
+
 // Importerer FinancialCard-komponenten
 import FinancialCard from "@components/FinancialCard.astro";
 
@@ -17,7 +19,6 @@ const financialData = await fetch(
     <div class="financial-header">
 
         <div class="financial-text">
-
             <!-- Henter eyebrow fra API'et -->
             <p class="eyebrow">
                 {financialData.eyebrow}
@@ -28,7 +29,6 @@ const financialData = await fetch(
 
             <!-- Henter undertitel fra API'et -->
             <p>{financialData.subtitle}</p>
-
         </div>
 
         <!-- Knapper til at styre carousel -->
@@ -39,7 +39,7 @@ const financialData = await fetch(
                 id="previous"
                 aria-label="Forrige"
             >
-                <ArrowLeft class="arrow"/>
+                <ArrowLeft class="arrow" />
             </button>
 
             <!-- Knap til at scrolle frem -->
@@ -52,116 +52,77 @@ const financialData = await fetch(
 
         </div>
     </div>
-
-
-    <!-- Carousel med alle financial cards -->
-    <div
-        class="financial-cards"
-        id="financial-cards"
-    >
-        {
-            financialData.values.map((financial: any) => (
-                <div class="financial-card-wrapper">
-
-                    <!-- Sender data fra API'et videre til FinancialCard -->
-                    <FinancialCard financial={financial} />
-
-                </div>
-            ))
-        }
-    </div>
-
 </div>
 
 
+<!-- Carousel med alle financial cards -->
+<div
+    class="financial-cards"
+    id="financial-cards"
+>
+    {
+        financialData.values.map((financial: any) => (
+            <div class="financial-card-wrapper">
+                <!-- Sender data fra API'et videre til FinancialCard -->
+                <FinancialCard financial={financial} />
+            </div>
+        ))
+    }
+</div>
+
+
+
+
 <script>
-    // Finder carousel-containeren
-    const cards = document.querySelector("#financial-cards");
+    document.addEventListener("astro:page-load", () => {
+        const cards = document.querySelector("#financial-cards");
+        const previous = document.querySelector("#previous");
+        const next = document.querySelector("#next");
 
-    // Finder knappen til at scrolle tilbage
-    const previous = document.querySelector("#previous");
+        if (!cards || !previous || !next) return;
 
-    // Finder knappen til at scrolle frem
-    const next = document.querySelector("#next");
+        next.addEventListener("click", () => {
+            const card = cards.querySelector(".financial-card-wrapper");
 
+            if (!card) return;
 
-    // Scroller carousel'et frem
-    function scrollNext() {
+            const cardWidth = card.getBoundingClientRect().width;
+            const gap = 16;
 
-        // Stopper hvis carousel-containeren ikke findes
-        if (!cards) return;
-
-        // Finder det første card
-        const card = cards.querySelector(".financial-card-wrapper");
-
-        // Stopper hvis der ikke findes et card
-        if (!card) return;
-
-        // Finder bredden på cardet
-        const cardWidth = card.getBoundingClientRect().width;
-
-        // Afstanden mellem cards er 16px
-        const gap = 16;
-
-        // Scroller én card-bredde + gap frem
-        cards.scrollBy({
-            left: cardWidth + gap,
-            behavior: "smooth", // Gør scrollingen glidende
+            cards.scrollBy({
+                left: cardWidth + gap,
+                behavior: "smooth",
+            });
         });
-    }
 
+        previous.addEventListener("click", () => {
+            const card = cards.querySelector(".financial-card-wrapper");
 
-    // Scroller carousel'et tilbage
-    function scrollPrevious() {
+            if (!card) return;
 
-        // Stopper hvis carousel-containeren ikke findes
-        if (!cards) return;
+            const cardWidth = card.getBoundingClientRect().width;
+            const gap = 16;
 
-        // Finder det første card
-        const card = cards.querySelector(".financial-card-wrapper");
-
-        // Stopper hvis der ikke findes et card
-        if (!card) return;
-
-        // Finder bredden på cardet
-        const cardWidth = card.getBoundingClientRect().width;
-
-        // Afstanden mellem cards er 16px
-        const gap = 16;
-
-        // Scroller én card-bredde + gap tilbage
-        cards.scrollBy({
-            left: -(cardWidth + gap),
-            behavior: "smooth", // Gør scrollingen glidende
+            cards.scrollBy({
+                left: -(cardWidth + gap),
+                behavior: "smooth",
+            });
         });
-    }
-
-
-    // Kører scrollNext når der klikkes på næste-knappen
-    next?.addEventListener("click", scrollNext);
-
-    // Kører scrollPrevious når der klikkes på forrige-knappen
-    previous?.addEventListener("click", scrollPrevious);
+    });
 </script>
 
-
 <style>
-
     /* --- Hele sektionen --- */
-
     .financial-wrapper {
-        /* Maksimal bredde på hele sektionen */
         width: min(75rem, 100%);
         margin: 8rem auto 0;
     }
 
 
     /* --- Header --- */
-
     .financial-header {
         display: flex;
         justify-content: space-between;
-        /* Knapperne flugter med bunden */
         align-items: flex-end;
         margin-bottom: 2rem;
     }
@@ -173,81 +134,68 @@ const financialData = await fetch(
     .financial-text .eyebrow {
         margin: 0;
         font: var(--body-sm);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
     }
 
     .financial-text h1 {
         margin: 0.5rem 0 1rem;
-        font-size: 1.8rem;
-      font: var(--heading-lg);
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-
+        font: var(--heading-lg);
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
     }
 
     .financial-text p {
         margin: 0;
         line-height: 1.6;
-      font: var(--body-lg);
-      color: var(--color-text-muted);
+        font: var(--body-lg);
+        color: var(--color-text-muted);
     }
 
 
+    /* --- Carousel-knapper --- */
+    .carousel-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
 
-
-/* --- Carousel-knapper --- */
-.carousel-buttons {
-    display: flex;
-    /* Afstand mellem knapperne */
-    gap: 0.5rem;
-}
-
-.carousel-buttons button {
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 50%;
-    background-color: var(--color-blue-700);
-    color: white;
-    font-size: 1.5rem;
-    line-height: 1;
-    padding: 0;
-    cursor: pointer;
-    
-}
-
-
+    .carousel-buttons button {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--color-blue-700);
+        color: white;
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 0;
+        cursor: pointer;
+        transform: translateX(-4rem);
+    }
 
     .carousel-buttons button:hover {
         opacity: 0.8;
     }
+
     .arrow {
-      width: 1rem;
-      height: 1rem;
+        width: 1rem;
+        height: 1rem;
     }
+
 
     /* --- Cards / carousel --- */
     .financial-cards {
+        width: 90vw;
+        margin-left: calc(50% - 45vw);
         display: flex;
-
-        /* Afstand mellem cards */
         gap: 1rem;
-
-        /* Gør det muligt at scrolle vandret */
         overflow-x: auto;
-
-        /* Glidende scrolling */
         scroll-behavior: smooth;
-
-        /* Hvert card stopper ved starten */
         scroll-snap-type: x mandatory;
-
-        /* Skjuler scrollbar */
         scrollbar-width: none;
     }
 
@@ -258,30 +206,120 @@ const financialData = await fetch(
 
     /* Bestemmer hvor mange cards der kan ses */
     .financial-card-wrapper {
-
-        /* 4 cards med 1rem mellem hvert card */
-        flex: 0 0 calc((100% - 3rem) / 4);
-
-        /* Cardet snapper til venstre side */
+        flex: 0 0 calc((90vw - 3rem) / 4);
         scroll-snap-align: start;
     }
 
 
-    /* --- Mobil --- */
+    /* ========================================
+       Responsive
+    ========================================= */
 
-    @media (max-width: 800px) {
 
-        .financial-header {
-            /* Header bliver lodret på mindre skærme */
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
+    /* ========================================
+       Tablet
+    ========================================= */
+
+    @media (max-width: 900px) {
+
+        .financial-wrapper {
+            width: calc(100% - 6rem);
+            margin: 5rem auto 0;
         }
 
+        .financial-header {
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .financial-text {
+            max-width: 100%;
+        }
+
+        .carousel-buttons {
+            flex-shrink: 0;
+        }
+
+        .carousel-buttons button {
+            transform: none;
+        }
+
+        .financial-cards {
+            width: 100%;
+            margin-left: 0;
+            gap: 1rem;
+        }
+
+        /* Tre cards på tablet */
         .financial-card-wrapper {
-            /* På mobil vises ét card ad gangen */
-            flex: 0 0 85%;
+            flex: 0 0 calc((100% - 2rem) / 3);
         }
     }
 
+
+    /* ========================================
+       Mobil
+    ========================================= */
+
+    @media (max-width: 768px) {
+
+        /* Hele sektionen */
+        .financial-wrapper {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 5rem 0 0;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        .financial-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .financial-text {
+            width: 100%;
+            max-width: none;
+        }
+
+        .financial-text h1 {
+            margin: 0.5rem 0 0.75rem;
+        }
+
+        .financial-text p {
+            line-height: 1.6;
+        }
+
+        /* Carousel-knapper */
+        .carousel-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .carousel-buttons button {
+            width: 2.75rem;
+            height: 2.75rem;
+            transform: none;
+        }
+
+        /* Carousel */
+        .financial-cards {
+            width: 90vw;
+            margin-left: 0;
+            padding-left: 1.5rem;
+            box-sizing: border-box;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        /* Ét kort ad gangen */
+        .financial-card-wrapper {
+            flex: 0 0 calc(90vw - 3rem);
+            scroll-snap-align: start;
+        }
+    }
 </style>
