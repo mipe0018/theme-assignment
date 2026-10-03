@@ -116,19 +116,29 @@ const TeamsData = await fetch("https://ftk-api.pages.dev/team").then((res) =>
         gap: 2rem;
         width: 100%;
     }
+    /* ========================================
+   Responsive
+======================================== */
+    /* ========================================
+   Tablet
+======================================== */
 
-    /* Tablet */
     @media (max-width: 900px) {
         .teams-header {
             align-items: flex-start;
+            width: calc(100% - 2rem);
+            margin-inline: auto;
         }
 
         .teams-cards {
             grid-template-columns: repeat(2, 1fr);
+            width: calc(100% - 2rem);
+            margin-inline: auto;
         }
     }
-
-    /* Mobil */
+    /* ========================================
+   Mobil
+======================================== */
     @media (max-width: 600px) {
         .teams-header {
             flex-direction: column;

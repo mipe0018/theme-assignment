@@ -50,15 +50,16 @@ import checkmarkIcon from "../icons/checkmark.svg";
         </div>
     </div>
 </section>
-
 <style>
     @layer components {
-        /* Sectionen går i fuld bredde */
+        /* ========================================
+           DESKTOP
+        ======================================== */
+
         .info {
             width: 100%;
         }
 
-        /* Indholdet holdes i 1200px */
         .info-inner {
             width: min(75rem, 100%);
             margin-inline: auto;
@@ -68,7 +69,8 @@ import checkmarkIcon from "../icons/checkmark.svg";
             align-items: center;
         }
 
-        /* Plads til den grønne boks */
+        /* BILLEDE */
+
         .about-image {
             position: relative;
             padding: 1.25rem;
@@ -83,7 +85,8 @@ import checkmarkIcon from "../icons/checkmark.svg";
             border-radius: 25px;
         }
 
-        /* Grøn boks bag billedet */
+        /* GRØN BOKS */
+
         .green-box {
             position: absolute;
             width: 10rem;
@@ -94,7 +97,9 @@ import checkmarkIcon from "../icons/checkmark.svg";
             z-index: 0;
             border-radius: 25px;
         }
-        /*Typografi*/
+
+        /* TYPOGRAFI */
+
         .info-text h2 {
             font: var(--body-sm);
             font-weight: 600;
@@ -102,19 +107,22 @@ import checkmarkIcon from "../icons/checkmark.svg";
             letter-spacing: 0.12em;
             margin-bottom: 1rem;
         }
+
         .info-text h1 {
-            font-size: 1.8rem;
             font: var(--heading-lg);
             letter-spacing: -0.03em;
             margin-bottom: 1rem;
         }
+
         .info-text p {
             line-height: 1.6;
             font: var(--body-lg);
             color: var(--color-text-muted);
             margin-bottom: 1rem;
         }
-        /*Tekst ved siden af ikonerne*/
+
+        /* CHECKMARK TEKST */
+
         .about-text {
             display: flex;
             line-height: 1.6;
@@ -123,20 +131,43 @@ import checkmarkIcon from "../icons/checkmark.svg";
             margin-bottom: 1rem;
         }
 
+        .about-text p {
+            display: flex;
+            align-items: flex-start;
+        }
+
         .icon {
-            margin: 1rem;
+            flex-shrink: 0;
+            margin: 0.5rem 0.75rem 0 0;
             width: 2rem;
             height: 2rem;
             filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
         }
-        /* =========================================
-       Mobil
-========================================= */
-        @media (max-width: 768px) {
-            /* =========================================
-       SECTION
-    ========================================= */
 
+        /* ========================================
+   TABLET / MINDRE DESKTOP
+======================================== */
+
+        @media (min-width: 901px) and (max-width: 1200px) {
+            .info-inner {
+                width: calc(100% - 4rem);
+                margin-inline: auto;
+                gap: 3rem;
+            }
+
+            .about-image {
+                padding: 1rem;
+            }
+
+            .info-text {
+                min-width: 0;
+            }
+        }
+        /* ========================================
+           MOBIL
+        ======================================== */
+
+        @media (max-width: 768px) {
             .info {
                 margin-top: 1rem;
             }
@@ -150,9 +181,7 @@ import checkmarkIcon from "../icons/checkmark.svg";
                 padding: 0 1.5rem;
             }
 
-            /* =========================================
-       TEKST
-    ========================================= */
+            /* TEKST */
 
             .info-text {
                 width: 100%;
@@ -172,9 +201,7 @@ import checkmarkIcon from "../icons/checkmark.svg";
                 margin-bottom: 1.5rem;
             }
 
-            /* =========================================
-       CHECKMARK TEKST
-    ========================================= */
+            /* CHECKMARK TEKST */
 
             .about-text {
                 display: flex;
@@ -196,9 +223,7 @@ import checkmarkIcon from "../icons/checkmark.svg";
                 margin: 0.25rem 0.75rem 0 0;
             }
 
-            /* =========================================
-       BILLEDE
-    ========================================= */
+            /* BILLEDE */
 
             .about-image {
                 width: 100%;
@@ -213,9 +238,7 @@ import checkmarkIcon from "../icons/checkmark.svg";
                 border-radius: 20px;
             }
 
-            /* =========================================
-       GRØN BOKS
-    ========================================= */
+            /* GRØN BOKS */
 
             .green-box {
                 width: 6rem;
