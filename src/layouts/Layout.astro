@@ -80,4 +80,17 @@ import Footer from "@components/Footer.astro";
   main {
     grid-column: a / d;
   }
+
+  @media (max-width: 768px) {
+    /* Mobile */
+
+    body {
+      display: block;
+    }
+
+    main {
+      grid-column: a / d;
+      min-width: 0;
+    }
+  }
 </style>

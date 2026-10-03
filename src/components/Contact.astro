@@ -12,7 +12,10 @@ import IconClock from "../icons/clock.svg";
 import IconPin from "../icons/pin.svg";
 ---
 
-<section class="contact-info">
+<section
+    class="contact-info"
+    id="contact"
+>
     <div class="contact-info-inner">
         <!-- TEKST / VENSTRE KOLONNE -->
         <div class="info-text">
@@ -316,90 +319,122 @@ import IconPin from "../icons/pin.svg";
         .ContactImgSmallTop .contact-img,
         .ContactImgSmallBottom .contact-img {
             display: block;
-
             width: 100%;
             height: 100%;
-
             object-fit: cover;
-
             border-radius: 25px;
-        }
-
-        /* ========================================
-           TABLET
-           ======================================== */
-
-        @media (max-width: 900px) {
-            .contact-info-inner {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto auto;
-            }
-
-            .info-text {
-                grid-column: 1 / 3;
-                grid-row: 1;
-            }
-
-            .ContactImgLarge {
-                grid-column: 1;
-                grid-row: 2 / 4;
-
-                min-height: 500px;
-            }
-
-            .ContactImgSmallTop {
-                grid-column: 2;
-                grid-row: 2;
-            }
-
-            .ContactImgSmallBottom {
-                grid-column: 2;
-                grid-row: 3;
-            }
         }
 
         /* ========================================
            MOBIL
            ======================================== */
 
-        @media (max-width: 600px) {
-            .contact-info-inner {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
+        @media (max-width: 768px) {
+            .contact-info {
+                display: block;
+                margin-top: 6rem;
             }
 
+            .contact-info-inner {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            /* TEKST */
+
             .info-text {
-                grid-column: 1;
-                grid-row: 1;
+                min-width: 0;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            .info-text > h2 {
+                margin-bottom: 0.5rem;
+            }
+
+            .info-text > h1 {
+                margin-bottom: 0.75rem;
+            }
+
+            .info-text > p {
+                margin-bottom: 1.5rem;
+            }
+
+            /* KONTAKT OPLYSNINGER */
+
+            .info-icon {
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .icon-circle {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+            }
+
+            .contact-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .icon-text {
+                margin-left: 0;
+                min-width: 0;
+            }
+
+            .icon-text h2 {
+                font-size: 0.9rem;
+            }
+
+            .icon-text h3 {
+                font-size: 1rem;
+            }
+
+            /* BILLEDER */
+
+            .ContactImgLarge,
+            .ContactImgSmallTop,
+            .ContactImgSmallBottom {
+                width: 100%;
+                height: auto;
             }
 
             .ContactImgLarge {
-                grid-column: 1;
-                grid-row: 2;
-
-                min-height: 400px;
+                position: relative;
+                z-index: 1;
             }
 
-            .ContactImgSmallTop {
-                grid-column: 1;
-                grid-row: 3;
-
-                min-height: 250px;
+            .ContactImgLarge .contact-img {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                border-radius: 25px;
             }
 
-            .ContactImgSmallBottom {
-                grid-column: 1;
-                grid-row: 4;
-
-                min-height: 250px;
+            .ContactImgSmallTop .contact-img,
+            .ContactImgSmallBottom .contact-img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1.5 / 1;
+                object-fit: cover;
+                border-radius: 25px;
             }
+
+            /* GRØN BOKS */
 
             .green-box {
-                width: 7rem;
-                height: 7rem;
-
+                width: 8rem;
+                height: 5rem;
                 left: -0.5rem;
                 bottom: -0.5rem;
+                border-radius: 20px;
             }
         }
     }

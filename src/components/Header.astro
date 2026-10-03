@@ -29,7 +29,24 @@ import logo from "../assets/images/logo.png";
 </header>
 
 <!-- =========================
-     LOGIN POPUP
+     MOBILE MENU TOGGLE
+========================= -->
+
+<input
+    type="checkbox"
+    id="menu-toggle"
+    class="menu-toggle"
+/>
+
+<label
+    for="menu-toggle"
+    class="menu-button"
+>
+    ☰
+</label>
+
+<!-- =========================
+     LOGIN TOGGLE
 ========================= -->
 
 <input
@@ -38,7 +55,62 @@ import logo from "../assets/images/logo.png";
     class="login-toggle"
 />
 
-<!-- Klik udenfor popup lukker den -->
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<div class="mobile-menu">
+    <label
+        for="menu-toggle"
+        class="close-menu"
+    >
+        ×
+    </label>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/case-studies">Case Studies</a>
+        <a href="/team">Team</a>
+        <a href="/about">About</a>
+    </nav>
+
+    <label
+        for="login-toggle"
+        class="mobile-login-button"
+    >
+        Login
+    </label>
+
+    <!-- LOGIN POPUP PÅ MOBIL -->
+
+    <div class="mobile-login-popup">
+        <h2>Dashboard Login</h2>
+
+        <form>
+            <label for="mobile-login-email"> Email Adress </label>
+
+            <input
+                type="email"
+                id="mobile-login-email"
+                placeholder="Enter your email"
+            />
+
+            <label for="mobile-login-password"> Password </label>
+
+            <input
+                type="password"
+                id="mobile-login-password"
+                placeholder="Enter your password"
+            />
+
+            <button type="submit"> Go to dashboard </button>
+        </form>
+    </div>
+</div>
+
+<!-- =========================
+     LOGIN BACKDROP
+========================= -->
 
 <label
     for="login-toggle"
@@ -46,7 +118,7 @@ import logo from "../assets/images/logo.png";
 ></label>
 
 <!-- =========================
-     LOGIN BOX
+     DESKTOP LOGIN POPUP
 ========================= -->
 
 <div class="login-popup">
@@ -60,7 +132,7 @@ import logo from "../assets/images/logo.png";
     <h2>Dashboard Login</h2>
 
     <form>
-        <label for="login-email"> Email Adress</label>
+        <label for="login-email"> Email Adress </label>
 
         <input
             type="email"
@@ -117,16 +189,7 @@ import logo from "../assets/images/logo.png";
         color: var(--color-on-ui-primary);
     }
 
-    .header-content button {
-        background-color: var(--color-on-ui-primary);
-        font-family: var(--font-heading);
-        padding: 8px 20px;
-        border-radius: 999px;
-    }
-
-    /* =========================
-       LOGIN KNAP
-    ========================== */
+    /* LOGIN KNAP DESKTOP */
 
     .login-button {
         background-color: var(--color-on-ui-primary);
@@ -144,7 +207,20 @@ import logo from "../assets/images/logo.png";
     }
 
     /* =========================
-       SKJULT CHECKBOX
+       MOBILE MENU
+    ========================== */
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .menu-button,
+    .mobile-menu {
+        display: none;
+    }
+
+    /* =========================
+       LOGIN TOGGLE
     ========================== */
 
     .login-toggle {
@@ -156,7 +232,7 @@ import logo from "../assets/images/logo.png";
     }
 
     /* =========================
-       BAGGRUND / KLIK UDENFOR
+       LOGIN BACKDROP
     ========================== */
 
     .login-backdrop {
@@ -167,14 +243,12 @@ import logo from "../assets/images/logo.png";
         cursor: default;
     }
 
-    /* Vis baggrund når popup er åben */
-
     .login-toggle:checked ~ .login-backdrop {
         display: block;
     }
 
     /* =========================
-       LOGIN POPUP
+       DESKTOP LOGIN POPUP
     ========================== */
 
     .login-popup {
@@ -198,20 +272,12 @@ import logo from "../assets/images/logo.png";
             visibility 0.2s ease;
     }
 
-    /* =========================
-       ÅBEN POPUP
-    ========================== */
-
     .login-toggle:checked ~ .login-popup {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
         transform: translateY(0);
     }
-
-    /* =========================
-       LUK ×
-    ========================== */
 
     .close-login {
         position: absolute;
@@ -227,27 +293,22 @@ import logo from "../assets/images/logo.png";
         color: #111;
     }
 
-    /* =========================
-       OVERSKRIFT
-    ========================== */
-
-    .login-popup h2 {
+    .login-popup h2,
+    .mobile-login-popup h2 {
         margin: 0 0 1.2rem;
         font-family: var(--button-lg);
         font-size: 2rem;
     }
 
-    /* =========================
-       FORM
-    ========================== */
-
-    .login-popup form {
+    .login-popup form,
+    .mobile-login-popup form {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
     }
 
-    .login-popup form label {
+    .login-popup form label,
+    .mobile-login-popup form label {
         margin-top: 0.4rem;
         font-family: var(--button-sm);
         font-size: 1rem;
@@ -255,34 +316,27 @@ import logo from "../assets/images/logo.png";
         letter-spacing: 0.5;
     }
 
-    /* =========================
-       INPUTS
-    ========================== */
-
-    .login-popup input {
+    .login-popup input,
+    .mobile-login-popup input {
         width: 100%;
         box-sizing: border-box;
         padding: 0.75rem;
         border: 1px solid #ddd;
-        border-radius: 9px;
+        border-radius: 999px;
         background: var(--color-surface-secondary);
         color: #222;
         font-family: inherit;
         font-size: 0.9rem;
-        border-radius: 999px;
     }
 
-    .login-popup input:focus {
+    .login-popup input:focus,
+    .mobile-login-popup input:focus {
         outline: 2px solid var(--color-blue-700);
-
         border-color: transparent;
     }
 
-    /* =========================
-       DASHBOARD KNAP
-    ========================== */
-
-    .login-popup button {
+    .login-popup button,
+    .mobile-login-popup button {
         width: 100%;
         margin-top: 1rem;
         padding: 0.75rem 1rem;
@@ -295,7 +349,161 @@ import logo from "../assets/images/logo.png";
         cursor: pointer;
     }
 
-    .login-popup button:hover {
+    .login-popup button:hover,
+    .mobile-login-popup button:hover {
         opacity: 0.9;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 768px) {
+        .header-content {
+            grid-template-columns: 1fr auto;
+        }
+
+        /* Skjul desktop-menu */
+
+        .menu {
+            display: none;
+        }
+
+        /* Skjul desktop-login */
+
+        .login-button {
+            display: none;
+        }
+
+        /* Hamburger */
+
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            color: var(--color-on-ui-primary);
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        /* =========================
+           SELVE MOBILMENUEN
+        ========================== */
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(85%, 400px);
+            height: 100svh;
+            box-sizing: border-box;
+            padding: 6rem 2rem 2rem;
+            background-color: var(--color-neutrals-900);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        /* ÅBN MENU */
+
+        .menu-toggle:checked ~ .mobile-menu {
+            transform: translateX(0);
+        }
+
+        /* =========================
+           LUK-KRYDS
+        ========================== */
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--color-on-ui-primary);
+            font-size: 2.5rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        /* =========================
+           LINKS
+        ========================== */
+
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu nav a {
+            text-decoration: none;
+            color: var(--color-text-weak);
+            font: var(--button-sm);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-text-muted);
+        }
+
+        .mobile-menu nav a:hover {
+            color: var(--color-on-ui-primary);
+        }
+
+        /* =========================
+           LOGIN KNAP
+        ========================== */
+
+        .mobile-login-button {
+            margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.2rem;
+            background-color: var(--color-on-ui-primary);
+            color: var(--color-text);
+            border-radius: 999px;
+            font: var(--button-sm);
+            cursor: pointer;
+        }
+
+        .mobile-login-button:hover {
+            opacity: 0.8;
+        }
+
+        /* =========================
+           LOGIN POPUP I MENUEN
+        ========================== */
+
+        .mobile-login-popup {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-toggle:checked ~ .mobile-menu .mobile-login-popup {
+            display: block;
+        }
+
+        /* Skjul desktop-popup på mobil */
+
+        .login-popup {
+            display: none;
+        }
+
+        /* Backdrop bruges ikke på mobil */
+
+        .login-backdrop {
+            display: none !important;
+        }
     }
 </style>

@@ -16,9 +16,7 @@ const selectedTeams = teamsData.slice(0, 2);
   <div class="about">
     <div class="about-heading">
       <h2>About</h2>
-
       <h1>Igniting Innovation</h1>
-
       <p>
         Our strength lies in the collaboration between our talented teams and
         esteemed clients. We cultivate a workplace that champions innovation,
@@ -53,14 +51,9 @@ const selectedTeams = teamsData.slice(0, 2);
 
   <Values variant="alternative" />
 
-  <!-- =========================
-       OUR TEAM
-  ========================== -->
-
   <section class="about-team">
-    <div class="about-team-grid">
-      <!-- TEKST -->
-
+    <!-- DESKTOP VERSION -->
+    <div class="about-team-grid desktop-team">
       <div class="about-team-content">
         <span>OUR TEAM</span>
 
@@ -75,12 +68,9 @@ const selectedTeams = teamsData.slice(0, 2);
         <a
           href="/team"
           class="join-team-button"
+          >Meet the Team</a
         >
-          Meet the Team
-        </a>
       </div>
-
-      <!-- BILLEDER -->
 
       <div class="about-team-images">
         {
@@ -102,16 +92,12 @@ const selectedTeams = teamsData.slice(0, 2);
         }
       </div>
 
-      <!-- PERSONINFO -->
-
       <div class="about-team-info">
         {
           selectedTeams[0] && (
             <div class="team-info">
               <h3>{selectedTeams[0].name}</h3>
-
               <span>{selectedTeams[0].title}</span>
-
               <p>{selectedTeams[0].description}</p>
             </div>
           )
@@ -121,14 +107,67 @@ const selectedTeams = teamsData.slice(0, 2);
           selectedTeams[1] && (
             <div class="team-info">
               <h3>{selectedTeams[1].name}</h3>
-
               <span>{selectedTeams[1].title}</span>
-
               <p>{selectedTeams[1].description}</p>
             </div>
           )
         }
       </div>
+    </div>
+
+    <!-- MOBILE VERSION -->
+    <div class="mobile-team">
+      <div class="mobile-team-content">
+        <span>OUR TEAM</span>
+
+        <h2>Meet the people behind our success</h2>
+
+        <p>
+          Our team is made up of creative and dedicated people who work together
+          to create meaningful digital solutions. We believe that great results
+          come from collaboration, curiosity and different perspectives.
+        </p>
+      </div>
+
+      {
+        selectedTeams[0] && (
+          <div class="mobile-team-person">
+            <TeamsCard
+              team={selectedTeams[0]}
+              variant="compact"
+            />
+
+            <div class="team-info">
+              <h3>{selectedTeams[0].name}</h3>
+              <span>{selectedTeams[0].title}</span>
+              <p>{selectedTeams[0].description}</p>
+            </div>
+          </div>
+        )
+      }
+
+      {
+        selectedTeams[1] && (
+          <div class="mobile-team-person">
+            <TeamsCard
+              team={selectedTeams[1]}
+              variant="compact"
+            />
+
+            <div class="team-info">
+              <h3>{selectedTeams[1].name}</h3>
+              <span>{selectedTeams[1].title}</span>
+              <p>{selectedTeams[1].description}</p>
+            </div>
+          </div>
+        )
+      }
+
+      <a
+        href="/team"
+        class="join-team-button"
+        >Meet the Team</a
+      >
     </div>
   </section>
 
@@ -136,50 +175,53 @@ const selectedTeams = teamsData.slice(0, 2);
 </Layout>
 
 <style>
+  /* =========================================
+     ABOUT HEADING - DESKTOP
+     ========================================= */
+
   .about {
     width: 100%;
   }
 
   .about-heading {
-    width: min(35rem, 100%);
-    margin-inline: auto;
-    padding-block: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: min(75rem, calc(100% - 4rem));
+    margin: 4rem auto 3rem;
     text-align: center;
-    margin-bottom: 2rem;
   }
 
   .about-heading h2 {
+    margin-bottom: 1rem;
     font: var(--body-sm);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1rem;
     color: var(--color-text);
   }
 
   .about-heading h1 {
-    font-size: 1.8rem;
+    margin: 0 0 1rem;
     font: var(--heading-lg);
     letter-spacing: -0.03em;
-    margin-bottom: 1rem;
     color: var(--color-text);
   }
 
   .about-heading p {
-    line-height: 1.6;
+    max-width: 600px;
+    margin: 1.25rem auto 0;
     font: var(--body-lg);
+    line-height: 1.6;
     color: var(--color-text-muted);
   }
 
+  /* =========================================
+     NUMBERS - DESKTOP
+     ========================================= */
+
   .numbers-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
-    margin: 6rem 0;
+    width: min(75rem, calc(100% - 4rem));
+    margin: 5rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
   }
 
   .numbers {
@@ -187,25 +229,20 @@ const selectedTeams = teamsData.slice(0, 2);
   }
 
   .numbers h1 {
-    margin: 0;
-    color: var(--color-text);
-    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
     font: var(--heading-lg);
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   .numbers h2 {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    font: var(--body-lg);
+    margin: 0;
+    font: var(--body-sm);
     color: var(--color-text-muted);
   }
 
-  /* =========================
-   OUR TEAM
-========================= */
+  /* =========================================
+     ABOUT TEAM - DESKTOP
+     ========================================= */
 
   .about-team {
     width: 100%;
@@ -214,19 +251,12 @@ const selectedTeams = teamsData.slice(0, 2);
 
   .about-team-grid {
     display: grid;
-    grid-template-columns:
-      minmax(0, 1fr)
-      155px
-      minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 155px minmax(0, 1fr);
     column-gap: 5rem;
     width: min(1100px, calc(100% - 4rem));
     margin: 0 auto;
     align-items: center;
   }
-
-  /* =========================
-   TEKST
-========================= */
 
   .about-team-content {
     display: flex;
@@ -257,10 +287,6 @@ const selectedTeams = teamsData.slice(0, 2);
     line-height: 1.7;
   }
 
-  /* =========================
-   BUTTON
-========================= */
-
   .join-team-button {
     display: inline-flex;
     align-items: center;
@@ -282,10 +308,6 @@ const selectedTeams = teamsData.slice(0, 2);
     opacity: 0.9;
   }
 
-  /* =========================
-   BILLEDER
-========================= */
-
   .about-team-images {
     display: flex;
     flex-direction: column;
@@ -295,10 +317,6 @@ const selectedTeams = teamsData.slice(0, 2);
     width: 155px;
     justify-self: center;
   }
-
-  /* =========================
-   PERSONINFO
-========================= */
 
   .about-team-info {
     display: flex;
@@ -334,9 +352,15 @@ const selectedTeams = teamsData.slice(0, 2);
     line-height: 1.5;
   }
 
-  /* =========================
-   TABLET
-========================= */
+  /* Mobile version is hidden by default */
+
+  .mobile-team {
+    display: none !important;
+  }
+
+  /* =========================================
+     TABLET
+     ========================================= */
 
   @media (max-width: 900px) {
     .about-team-grid {
@@ -346,50 +370,144 @@ const selectedTeams = teamsData.slice(0, 2);
     }
   }
 
-  /* =========================
-   MOBIL
-========================= */
+  /* =========================================
+     MOBILE
+     ========================================= */
 
   @media (max-width: 700px) {
+    /* =========================
+       ABOUT HEADING
+       ========================= */
+
+    .about-heading {
+      width: calc(100% - 3rem);
+      margin: 2.5rem auto 2rem;
+      text-align: center;
+    }
+
+    .about-heading h2 {
+      margin-bottom: 0.5rem;
+      font: var(--body-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .about-heading h1 {
+      margin: 0 0 0.75rem;
+      font: var(--heading-xl);
+      font-size: 2.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .about-heading p {
+      max-width: 450px;
+      margin: 0 auto;
+      font: var(--body-lg);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       NUMBERS
+       ========================= */
+
     .numbers-info {
+      width: calc(100% - 3rem);
+      display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 0.75rem;
+      margin: 1rem auto;
     }
 
-    .about-team {
-      margin: 5rem 0;
+    .numbers {
+      text-align: center;
     }
 
-    .about-team-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
+    /* =========================
+       TEAM
+       ========================= */
+
+    .desktop-team {
+      display: none !important;
+    }
+
+    .mobile-team {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
       width: calc(100% - 3rem);
       margin: 0 auto;
     }
 
-    .about-team-content {
+    .about-team {
+      margin: 2.5rem 0 0;
+    }
+
+    .mobile-team-content {
+      display: flex;
+      flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    .about-team-content h2,
-    .about-team-content p {
-      max-width: 600px;
+    .mobile-team-content span {
+      margin-bottom: 0.5rem;
+      color: var(--color-blue-700);
+      font: var(--body-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
-    .about-team-images {
-      width: 155px;
-      margin: 0 auto;
+    .mobile-team-content h2 {
+      max-width: 450px;
+      margin: 0 0 0.75rem;
+      font: var(--heading-xl);
+      font-size: 2.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
     }
 
-    .about-team-info {
+    .mobile-team-content p {
+      max-width: 450px;
+      margin: 0;
+      font: var(--body-lg);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    .mobile-team-person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .mobile-team-person .team-info {
+      align-items: center;
+      text-align: center;
       max-width: 400px;
-      margin: 0 auto;
     }
 
-    .team-info {
-      align-items: center;
-      text-align: center;
+    .mobile-team-person .team-info h3 {
+      margin-bottom: 0.2rem;
+    }
+
+    .mobile-team-person .team-info span {
+      margin-bottom: 0.4rem;
+    }
+
+    .mobile-team-person .team-info p {
+      margin: 0;
+    }
+
+    .mobile-team .join-team-button {
+      margin: 0 auto;
     }
   }
 </style>

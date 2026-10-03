@@ -19,43 +19,81 @@ import Teams from "@components/Teams.astro";
 </Layout>
 
 <style>
+  /* =========================
+     TEAM HEADING
+     ========================= */
+
   .team {
-    grid-column: a / d;
     width: 100%;
-    margin-top: 2rem;
   }
 
-  /* Begrænser indholdet til maks. 1200px */
   .team-heading {
-    width: min(35rem, 100%);
-    margin-inline: auto;
-    padding-block: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: min(75rem, calc(100% - 4rem));
+    margin: 4rem auto 3rem;
     text-align: center;
-    margin-bottom: 2rem;
   }
+
   .team-heading h2 {
+    margin-bottom: 1rem;
     font: var(--body-sm);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin-bottom: 1rem;
     color: var(--color-text);
   }
 
   .team-heading h1 {
-    font-size: 1.8rem;
+    margin: 0 0 1rem;
     font: var(--heading-lg);
     letter-spacing: -0.03em;
-    margin-bottom: 1rem;
     color: var(--color-text);
   }
 
   .team-heading p {
-    line-height: 1.6;
+    max-width: 600px;
+    margin: 1.25rem auto 0;
     font: var(--body-lg);
+    line-height: 1.6;
     color: var(--color-text-muted);
+  }
+
+  /* =========================
+     MOBILE
+     ========================= */
+
+  @media (max-width: 768px) {
+    .team {
+      width: 100%;
+    }
+
+    .team-heading {
+      width: calc(100% - 3rem);
+      margin: 2.5rem auto 2rem;
+      text-align: center;
+    }
+
+    .team-heading h2 {
+      margin-bottom: 0.5rem;
+      font: var(--body-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .team-heading h1 {
+      margin: 0 0 0.75rem;
+      font: var(--heading-xl);
+      font-size: 2.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .team-heading p {
+      max-width: 450px;
+      margin: 0 auto;
+      font: var(--body-lg);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
   }
 </style>

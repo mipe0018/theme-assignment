@@ -129,5 +129,101 @@ import checkmarkIcon from "../icons/checkmark.svg";
             height: 2rem;
             filter: invert(48%) sepia(79%) saturate(500%) hue-rotate(90deg);
         }
+        /* =========================================
+       Mobil
+========================================= */
+        @media (max-width: 768px) {
+            /* =========================================
+       SECTION
+    ========================================= */
+
+            .info {
+                margin-top: 1rem;
+            }
+
+            .info-inner {
+                width: 100%;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                padding: 0 1.5rem;
+            }
+
+            /* =========================================
+       TEKST
+    ========================================= */
+
+            .info-text {
+                width: 100%;
+            }
+
+            .info-text h2 {
+                margin-bottom: 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            .info-text h1 {
+                margin-bottom: 0.75rem;
+                line-height: 1.2;
+            }
+
+            .info-text > p {
+                margin-bottom: 1.5rem;
+            }
+
+            /* =========================================
+       CHECKMARK TEKST
+    ========================================= */
+
+            .about-text {
+                display: flex;
+                align-items: flex-start;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .about-text p {
+                display: flex;
+                align-items: flex-start;
+                margin: 0;
+            }
+
+            .icon {
+                flex-shrink: 0;
+                width: 1.5rem;
+                height: 1.5rem;
+                margin: 0.25rem 0.75rem 0 0;
+            }
+
+            /* =========================================
+       BILLEDE
+    ========================================= */
+
+            .about-image {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0.75rem;
+            }
+
+            .about-img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 20px;
+            }
+
+            /* =========================================
+       GRØN BOKS
+    ========================================= */
+
+            .green-box {
+                width: 6rem;
+                height: 6rem;
+                top: -0.25rem;
+                right: -0.25rem;
+                border-radius: 20px;
+            }
+        }
     }
 </style>

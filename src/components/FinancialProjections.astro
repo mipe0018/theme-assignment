@@ -216,22 +216,72 @@ const financialData = await fetch(
 }
 
 
-    /* --- Mobil --- */
+    /* =========================
+           MOBILE
+========================== */
 
-    @media (max-width: 800px) {
+@media (max-width: 768px) {
 
-        .financial-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .financial-card-wrapper {
-            flex: 0 0 85%;
-        }
-
-        .financial-cards {
-            padding-left: 1rem;
-        }
+    /* Hele sektionen */
+    .financial-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 5rem 0 0;
+        padding: 0 1.5rem;
     }
+
+    /* Header */
+    .financial-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .financial-text {
+        width: 100%;
+        max-width: none;
+    }
+
+    .financial-text h1 {
+        margin: 0.5rem 0 0.75rem;
+    }
+
+    .financial-text p {
+        line-height: 1.6;
+    }
+
+    /* Carousel-knapper */
+    .carousel-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .carousel-buttons button {
+        width: 2.75rem;
+        height: 2.75rem;
+        transform: none;
+    }
+
+    /* Carousel */
+    .financial-cards {
+        width: 90vw;
+        margin-left: 0;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    /* Ét kort ad gangen */
+    .financial-card-wrapper {
+        flex: 0 0 calc(90vw - 3rem);
+        scroll-snap-align: start;
+    }
+
+}
+    }
+    
 </style>
